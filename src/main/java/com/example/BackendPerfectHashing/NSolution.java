@@ -1,4 +1,5 @@
 package com.example.BackendPerfectHashing;
+import java.util.*;
 
 
 /*
@@ -20,16 +21,65 @@ package com.example.BackendPerfectHashing;
 public class NSolution extends IPerfectHash{
 
 	private int rebuildCount = 0;
+	private int firstLevelSize;
+	private int[] firstLevelTable;
+	private List<String>[] secondLevelTables;
+	private Random random;
 
+	// Constructor
+	public NSolution(int size) {
+		firstLevelSize = size;
+		firstLevelTable = new int[firstLevelSize];
+		secondLevelTables = new List[firstLevelSize];
+		random = new Random();
+	}
+
+	@Override
     public boolean insert(String item){
-        return false;
+        int firstLevelIndex = firstLevelHash(item);
+		if (secondLevelTables[firstLevelIndex] == null) {
+			secondLevelTables[firstLevelIndex] = new ArrayList<String>();
+		}
+		List<String> secondLevelTable = secondLevelTables[firstLevelIndex];
+		int secondLevelIndex = secondLevelHash(item, secondLevelTable.size());
+		if (secondLevelTable.get(secondLevelIndex) != null){
+			return false; // Collision
+		}
+		secondLevelTable.set(secondLevelIndex, item);
+		return true;
     }
     public boolean delete(String item){
-        return false;
+		int firstLevelIndex = firstLevelHash(item);
+		if (secondLevelTables[firstLevelIndex] == null) {
+			return false; // Not found
+		}
+		List<String> secondLevelTable = secondLevelTables[firstLevelIndex];
+		int secondLevelIndex = secondLevelHash(item, secondLevelTable.size());
+		if (secondLevelTable.get(secondLevelIndex) != null && secondLevelTable.get(secondLevelIndex).equals(item)){
+			secondLevelTable.set(secondLevelIndex, null);
+			return true; // Deleted
+		}
+        return false; // Not Found
     }
     public boolean search(String item){
-        return false;
+        int firstLevelIndex = firstLevelHash(item);
+		if (secondLevelTables[firstLevelIndex] == null) {
+			return false; // Not found
+		}
+		List<String> secondLevelTable = secondLevelTables[firstLevelIndex];
+		int secondLevelIndex = secondLevelHash(item, secondLevelTable.size());
+		return secondLevelTable.get(secondLevelIndex) != null && secondLevelTable.get(secondLevelIndex).equals(item);
     }
+
+	private int firstLevelHash(String item) {
+		// TODO: First Level Hash Implementation
+		return 1;
+	}
+
+	private int secondLevelHash(String item, int size) {
+		// TODO: Second Level Hash Implementation
+		return 1;
+	}
 
 	/**
 	 * Call this if a collision occurs in the secondary hash table at index to pick a different hash function for the table.

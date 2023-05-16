@@ -17,15 +17,36 @@ package com.example.BackendPerfectHashing;
 public class NSquaredSolution extends IPerfectHash{
 
 	private int rebuildCount = 0;
+	private String[] hashTable;
 
+	// Constructor
+	public NSquaredSolution() {
+		hashTable = new String[100000];
+	}
+
+	@Override
     public boolean insert(String item){
-        return false;
+        int hash = hash_string(item);
+		if (hashTable[hash] == null){
+			hashTable[hash] = item;
+			return true;
+		} else {
+			return false;
+		}
     }
+	@Override
     public boolean delete(String item){
+		int hash = hash_string(item);
+		if (hashTable[hash] != null && hashTable[hash].equals(item)){
+			hashTable[hash] = null;
+			return true;
+		}
         return false;
     }
+	@Override
     public boolean search(String item){
-        return false;
+		int hash = hash_string(item);
+		return hashTable[hash] != null && hashTable[hash].equals(item);
     }
 
 	/**
@@ -44,6 +65,17 @@ public class NSquaredSolution extends IPerfectHash{
 	 */
 	public int get_rebuild_count(){
 		return rebuildCount;
-	} 
+	}
+
+	private int hash_string(String str) {
+		int code = 0;
+		final int base = 31; // Prime number for better distribution
+
+		for (int i = 0; i < str.length(); i++) {
+			code = (code * base + str.charAt(i));
+		}
+
+		return code;
+	}
 
 }
