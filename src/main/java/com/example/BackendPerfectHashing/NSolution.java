@@ -17,7 +17,7 @@ package com.example.BackendPerfectHashing;
  */
 
 
-public class NSolution implements IPerfectHash{
+public class NSolution extends IPerfectHash{
 
 	private int rebuildCount = 0;
 
@@ -31,7 +31,6 @@ public class NSolution implements IPerfectHash{
         return false;
     }
 
-	//
 	/**
 	 * Call this if a collision occurs in the secondary hash table at index to pick a different hash function for the table.
 	 * 
