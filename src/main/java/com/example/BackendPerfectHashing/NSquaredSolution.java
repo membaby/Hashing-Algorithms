@@ -14,7 +14,10 @@ package com.example.BackendPerfectHashing;
  */
 
 
-public class NSquaredSolution implements IPerfectHash{
+public class NSquaredSolution extends IPerfectHash{
+
+	private int rebuildCount = 0;
+
     public boolean insert(String item){
         return false;
     }
@@ -24,5 +27,23 @@ public class NSquaredSolution implements IPerfectHash{
     public boolean search(String item){
         return false;
     }
+
+	/**
+	 * Call this if a collision occurs in the secondary hash table at index to pick a different hash function for the table.
+	 * 
+	 * @param index the index of the second-level table to rebuild
+	 */
+	private void rebuild(){
+		rebuildCount++;
+		//Clear the secondary table and choose another hash function 
+	}
+
+	/**
+	 * 
+	 * @return the number of rebuilds that happened in the second-level
+	 */
+	public int get_rebuild_count(){
+		return rebuildCount;
+	} 
 
 }
