@@ -20,7 +20,7 @@ public class NSquaredSolution extends PerfectHashing{
 	private String[] hashTable;
 
 	// Constructor
-	public NSquaredSolution() {
+	public NSquaredSolution(int tableSize) {
 		hashTable = new String[100000];
 	}
 
@@ -51,8 +51,7 @@ public class NSquaredSolution extends PerfectHashing{
 
 	/**
 	 * Call this if a collision occurs in the secondary hash table at index to pick a different hash function for the table.
-	 * 
-	 * @param index the index of the second-level table to rebuild
+	 *
 	 */
 	private void rebuild(){
 		rebuildCount++;
