@@ -7,6 +7,7 @@ public class UniverseHashing
     private int u = 64 ;
     private int b = 0 ;
     private int[][] currentHashMatrix;
+    private int tableSize;
 
     public int[][] getHashMatrix()
     {
@@ -16,6 +17,7 @@ public class UniverseHashing
     public void newHashMatrix(int tableSize)
     {
         //number of rows | index size
+        this.tableSize = tableSize;
         int b = (int) Math.ceil(Math.log(tableSize) / Math.log(2));
         this.b = b ;
         int[][] hashMatrix = new int[b][u];
@@ -29,6 +31,7 @@ public class UniverseHashing
             }
         }
         this.currentHashMatrix = hashMatrix;
+
     }
 
     public String hash_string(String str)
@@ -41,7 +44,7 @@ public class UniverseHashing
         return Long.toBinaryString(code);
     }
 
-    public String hash(int[][] hashMatrix, String binaryString)
+    public int hash(int[][] hashMatrix, String binaryString)
     {
         int[] hx = new int[this.b];
         //construct the hx | array of hash digest
@@ -63,7 +66,8 @@ public class UniverseHashing
             digest += hx[i];
         }
 
-        return digest;
+        System.out.println(digest);
+        return Integer.parseInt(digest, 2) % this.tableSize;
     }
 }
 

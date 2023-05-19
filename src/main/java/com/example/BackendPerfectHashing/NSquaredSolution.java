@@ -47,7 +47,7 @@ public class NSquaredSolution extends PerfectHashing{
 
 	@Override
     public boolean insert(String item){
-		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 		if (hashTable[hash] == null){
 			elements.add(item);
 			hashTable[hash] = item;
@@ -67,7 +67,7 @@ public class NSquaredSolution extends PerfectHashing{
     }
 	@Override
     public boolean delete(String item){
-		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 		if (hashTable[hash] != null && hashTable[hash].equals(item)){
 			hashTable[hash] = null;
 			return true;
@@ -76,7 +76,7 @@ public class NSquaredSolution extends PerfectHashing{
     }
 	@Override
     public boolean search(String item){
-		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 		return hashTable[hash] != null && hashTable[hash].equals(item);
     }
 
@@ -89,18 +89,18 @@ public class NSquaredSolution extends PerfectHashing{
 			}
 		}
 		hasher.newHashMatrix(Size);
-		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 		String[] newhashTable = new String[TSize];
 		newhashTable[hash] = item;
 		newelements.add(item);
 		for (int i = 0; i < newelements.size(); i++) {
-				hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(newelements.get(i))),2);
+				hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(newelements.get(i)));
 				if (newhashTable[hash] == null){
 					newhashTable[hash] = newelements.get(i);
 				}
 				else{
 					hasher.newHashMatrix(Size);
-					hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+					hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 					newhashTable = new String[TSize];
 					newhashTable[hash] = item;
 					i = 0;

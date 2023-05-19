@@ -34,19 +34,19 @@ public class PerfectHashingApp
     }
 
     public static void main( String[] args ) throws IOException, InterruptedException {
-        /*UniverseHashing universeHashing = new UniverseHashing();
-        String binaryString = universeHashing.hash_string("hello");
+        UniverseHashing universeHashing = new UniverseHashing();
+        String binaryString = universeHashing.hash_string("hellothisisatest");
         System.out.println(binaryString);
         universeHashing.newHashMatrix(100);
         System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
-        String digest = universeHashing.hash(universeHashing.getHashMatrix() , binaryString);
+        int digest = universeHashing.hash(universeHashing.getHashMatrix() , binaryString);
         System.out.println(digest);
         binaryString = universeHashing.hash_string("world");
         System.out.println(binaryString);
         System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
         digest = universeHashing.hash(universeHashing.getHashMatrix(),binaryString);
         System.out.println(digest);
-*/
+
 
         //CLI implementation
         Scanner scanner = new Scanner(System.in);
