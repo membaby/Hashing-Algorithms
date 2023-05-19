@@ -38,13 +38,16 @@ public class PerfectHashingApp
         UniverseHashing universeHashing = new UniverseHashing();
         String binaryString = universeHashing.hash_string("hello");
         System.out.println(binaryString);
-        String hx = universeHashing.hash(binaryString, 100);
-        universeHashing.setHashString(hx);
-        for(int i = 0 ; i < 100 ; i ++)
-        {
-            //test that getters and setters works just fine
-            System.out.println(universeHashing.getHashString());
-        }
+        universeHashing.newHashMatrix(100);
+        System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
+        String digest = universeHashing.hash(universeHashing.getHashMatrix() , binaryString);
+        System.out.println(digest);
+        binaryString = universeHashing.hash_string("world");
+        System.out.println(binaryString);
+        System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
+        digest = universeHashing.hash(universeHashing.getHashMatrix(),binaryString);
+        System.out.println(digest);
+
 
         //CLI implementation
         Scanner scanner = new Scanner(System.in);
@@ -54,15 +57,15 @@ public class PerfectHashingApp
         int tableSize = 0;
         printTableMenu();
         tableChoice = scanner.next();
-        if(tableChoice.equals("3")) System.exit(0);
         System.out.println("Enter the size of the hash table: ");
         tableSize = scanner.nextInt();
+        DictionaryHandler dictionaryHandler = new DictionaryHandler(tableSize, tableChoice);
         while(true)
         {
             printActionMenu();
             methodChoice = scanner.next();
             if(methodChoice.equals("6")) System.exit(0);
-            new DictionaryHandler(methodChoice, tableSize, tableChoice);
+            dictionaryHandler.handleMethodChoice(methodChoice);
         }
     }
 }

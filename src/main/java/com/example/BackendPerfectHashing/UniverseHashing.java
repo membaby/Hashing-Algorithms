@@ -5,14 +5,30 @@ import java.util.Arrays;
 public class UniverseHashing
 {
     private int u = 64 ;
-    private String hashString = "";
+    private int b = 0 ;
+    private int[][] currentHashMatrix;
 
-    public void setHashString(String hashString) {
-        this.hashString = hashString;
+    public int[][] getHashMatrix()
+    {
+        return this.currentHashMatrix;
     }
 
-    public String getHashString() {
-        return hashString;
+    public void newHashMatrix(int tableSize)
+    {
+        //number of rows | index size
+        int b = (int) Math.ceil(Math.log(tableSize) / Math.log(2));
+        this.b = b ;
+        int[][] hashMatrix = new int[b][u];
+
+        //construct the hash matrix
+        for(int i = 0 ; i < b ; i ++)
+        {
+            for(int j = 0 ; j < u ; j++)
+            {
+                hashMatrix[i][j] = (int) (Math.random() * 2);
+            }
+        }
+        this.currentHashMatrix = hashMatrix;
     }
 
     public String hash_string(String str)
@@ -25,29 +41,15 @@ public class UniverseHashing
         return Long.toBinaryString(code);
     }
 
-    public String hash(String binaryString , int tableSize)
+    public String hash(int[][] hashMatrix, String binaryString)
     {
-
-        //number of rows | index size
-        int b = (int) Math.ceil(Math.log(tableSize) / Math.log(2));
-        int[][] hashMatrix = new int[b][u];
-
-        //construct the hash matrix
-        for(int i = 0 ; i < b ; i ++)
-        {
-            for(int j = 0 ; j < u ; j++)
-            {
-                hashMatrix[i][j] = (int) (Math.random() * 2);
-            }
-        }
-
-        int[] hx = new int[b];
+        int[] hx = new int[this.b];
         //construct the hx | array of hash digest
         for(int i = 0 ; i < binaryString.length() ; i ++)
         {
             if(binaryString.charAt(i) == '1')
             {
-                for(int j = 0 ; j < b ; j++)
+                for(int j = 0 ; j < this.b ; j++)
                 {
                     hx[j] = (hx[j] + hashMatrix[j][i]) % 2;
                 }
@@ -56,7 +58,7 @@ public class UniverseHashing
 
         //return the hash digest to caller
         String digest = "";
-        for(int i = 0 ; i < b ; i ++)
+        for(int i = 0 ; i < this.b ; i ++)
         {
             digest += hx[i];
         }

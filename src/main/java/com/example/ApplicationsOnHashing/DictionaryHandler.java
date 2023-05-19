@@ -5,9 +5,12 @@ import java.util.Scanner;
 public class DictionaryHandler
 {
     private EnglishDictionary englishDictionary;
-    public DictionaryHandler(String methodChoice, int tableSize, String hashTable)
+    public DictionaryHandler(int tableSize, String hashTable)
     {
         englishDictionary = new EnglishDictionary(hashTable, tableSize);
+    }
+
+    public void handleMethodChoice(String methodChoice){
         Scanner scanner = new Scanner(System.in);
         switch (methodChoice)
         {
