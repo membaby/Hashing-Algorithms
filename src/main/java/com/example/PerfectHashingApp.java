@@ -34,7 +34,7 @@ public class PerfectHashingApp
     }
 
     public static void main( String[] args ) throws IOException, InterruptedException {
-        UniverseHashing universeHashing = new UniverseHashing();
+        /*UniverseHashing universeHashing = new UniverseHashing();
         String binaryString = universeHashing.hash_string("hello");
         System.out.println(binaryString);
         universeHashing.newHashMatrix(100);
@@ -46,7 +46,7 @@ public class PerfectHashingApp
         System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
         digest = universeHashing.hash(universeHashing.getHashMatrix(),binaryString);
         System.out.println(digest);
-
+*/
 
         //CLI implementation
         Scanner scanner = new Scanner(System.in);
