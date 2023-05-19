@@ -20,82 +20,146 @@ import java.util.*;
 
 public class NSolution extends PerfectHashing{
 
-	private int rebuildCount = 0;
-	private int firstLevelSize;
-	private int[] firstLevelTable;
-	private List<String>[] secondLevelTables;
-	private Random random;
+	private int size;
+	private Lvl2Table[] table;
+	UniverseHashing hashFunc;
 
 	// Constructor
-	public NSolution(int size) {
-		firstLevelSize = size;
-		firstLevelTable = new int[firstLevelSize];
-		secondLevelTables = new List[firstLevelSize];
-		random = new Random();
+	public NSolution(int size) 
+	{
+		
+		size = 1 << log2(size);
+		this.size = size;
+		table = new Lvl2Table[size];
+		for (int i=0; i<size; i++)
+		{
+			table[i] = new Lvl2Table();
+		}
+		hashFunc = new UniverseHashing();
+		hashFunc.newHashMatrix(this.size);
 	}
 
 	@Override
-    public boolean insert(String item){
-        int firstLevelIndex = firstLevelHash(item);
-		if (secondLevelTables[firstLevelIndex] == null) {
-			secondLevelTables[firstLevelIndex] = new ArrayList<String>();
-		}
-		List<String> secondLevelTable = secondLevelTables[firstLevelIndex];
-		int secondLevelIndex = secondLevelHash(item, secondLevelTable.size());
-		if (secondLevelTable.get(secondLevelIndex) != null){
-			return false; // Collision
-		}
-		secondLevelTable.set(secondLevelIndex, item);
-		return true;
+    public boolean insert(String key)
+	{
+		String binaryStr = hashFunc.hash_string(key);
+        int index = 0;
+		// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		
+		return table[index].insert(key);
     }
-    public boolean delete(String item){
-		int firstLevelIndex = firstLevelHash(item);
-		if (secondLevelTables[firstLevelIndex] == null) {
-			return false; // Not found
-		}
-		List<String> secondLevelTable = secondLevelTables[firstLevelIndex];
-		int secondLevelIndex = secondLevelHash(item, secondLevelTable.size());
-		if (secondLevelTable.get(secondLevelIndex) != null && secondLevelTable.get(secondLevelIndex).equals(item)){
-			secondLevelTable.set(secondLevelIndex, null);
-			return true; // Deleted
-		}
-        return false; // Not Found
-    }
-    public boolean search(String item){
-        int firstLevelIndex = firstLevelHash(item);
-		if (secondLevelTables[firstLevelIndex] == null) {
-			return false; // Not found
-		}
-		List<String> secondLevelTable = secondLevelTables[firstLevelIndex];
-		int secondLevelIndex = secondLevelHash(item, secondLevelTable.size());
-		return secondLevelTable.get(secondLevelIndex) != null && secondLevelTable.get(secondLevelIndex).equals(item);
+	
+    public boolean delete(String key)
+	{
+		String binaryStr = hashFunc.hash_string(key);
+        int index = 0;
+		// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		
+        return table[index].delete(key);
     }
 
-	private int firstLevelHash(String item) {
-		// TODO: First Level Hash Implementation
-		return 1;
+    public boolean search(String key){
+        String binaryStr = hashFunc.hash_string(key);
+        int index = 0;
+		// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		
+        return table[index].search(key);
+    }
+
+	private int log2(int x)
+	{
+		int log = 0;
+		for (;size > 0; log++)
+		{
+			size = size >> 1;
+		}
+		return log;
 	}
 
-	private int secondLevelHash(String item, int size) {
-		// TODO: Second Level Hash Implementation
-		return 1;
-	}
+	class Lvl2Table extends PerfectHashing 
+	{
+		private int prevRebuildCount;
+		private int entryCount = 0;
+		String[] table = new String[0];
+		UniverseHashing hashFunc = new UniverseHashing();
 
-	/**
-	 * Call this if a collision occurs in the secondary hash table at index to pick a different hash function for the table.
-	 * 
-	 * @param index the index of the second-level table to rebuild
-	 */
-	private void rebuild_secondLevel(int index){
-		rebuildCount++;
-		//Clear the secondary table and choose another hash function 
-	}
 
-	/**
-	 * 
-	 * @return the number of rebuilds that happened in the second-level
-	 */
-	public int get_rebuild_count(){
-		return rebuildCount;
-	} 
+		public boolean insert(String key)
+		{
+			String binaryStr = hashFunc.hash_string(key);
+			int index = 0;
+			// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			//If key already exists
+			if(search(key))
+			{
+				return false;
+			}
+			entryCount++;
+			for (int i=0; i<table.length; i++)
+			{
+				if (table[i] == null)
+				{
+					table[i] = key;
+					break;
+				}
+			}
+			rebuild();
+			
+			return true;
+		}
+
+		public boolean search(String key)
+		{
+			String binaryStr = hashFunc.hash_string(key);
+			int index = 0;
+			// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			return table[index].equals(key);
+		}
+
+		public boolean delete(String key)
+		{
+			if (!search(key)) return false;
+			String binaryStr = hashFunc.hash_string(key);
+			int index = 0;
+			// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			table[index] = null;
+			entryCount -= 1;
+			return true;
+		}
+
+		private void rebuild()
+		{
+			String[] allEntries = new String[entryCount];
+			int j = 0;
+			for (int i=0; i<table.length; i++)
+			{
+				if (table[i] != null)
+				{
+					allEntries[j] = table[i];
+					j++;
+				}
+			}
+			
+			int size = 1 << log2(entryCount*entryCount);
+			table = new String[size];
+			prevRebuildCount = -1;
+			findingNoCollisionsFunc:
+			while(true)
+			{
+				prevRebuildCount++;
+				hashFunc.newHashMatrix(table.length);
+				Arrays.fill(table, null);
+				for (j=0; j<entryCount; j++)
+				{
+					String binaryStr = hashFunc.hash_string(allEntries[j]);
+					int index = 0;
+					// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+					if (table[index] != null) continue findingNoCollisionsFunc;
+				}	
+				break;
+			}
+		}
+
+		public int get_prev_rebuilds(){return prevRebuildCount;}
+	}
 }
