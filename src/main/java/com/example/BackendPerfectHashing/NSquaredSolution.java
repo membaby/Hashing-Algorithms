@@ -14,29 +14,60 @@ package com.example.BackendPerfectHashing;
  */
 
 
+import java.util.ArrayList;
+
 public class NSquaredSolution extends PerfectHashing{
 
 	private int rebuildCount = 0;
 	private String[] hashTable;
+	private int Size;
+	private int TSize;
+	private UniverseHashing hasher = new UniverseHashing();
+	private ArrayList<String> elements = new ArrayList<>();
+	private int getP2(int s){
+		int po = 1 ;
+		while (true){
+			if (po >= s){
+				return po;
+			}
+			po = po *2;
+		}
+	}
 
 	// Constructor
-	public NSquaredSolution(int tableSize) {
-		hashTable = new String[100000];
+	public NSquaredSolution(int size) {
+		Size = size*size;
+		TSize = getP2(Size);
+		hashTable = new String[TSize];
+		hasher.newHashMatrix(Size);
+		/*
+		* initialize hasher
+		**/
 	}
 
 	@Override
     public boolean insert(String item){
-        int hash = hash_string(item);
+		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
 		if (hashTable[hash] == null){
+			elements.add(item);
 			hashTable[hash] = item;
+			for (int i = 0; i < TSize; i++) {
+				if (hashTable[i] != null) {
+					System.out.println("index at " + i + " is :" + hashTable[i]);
+				}
+			}
 			return true;
 		} else {
+			if (hashTable[hash] != item){
+				rehash(item);
+				return true;
+			}
 			return false;
 		}
     }
 	@Override
     public boolean delete(String item){
-		int hash = hash_string(item);
+		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
 		if (hashTable[hash] != null && hashTable[hash].equals(item)){
 			hashTable[hash] = null;
 			return true;
@@ -45,36 +76,52 @@ public class NSquaredSolution extends PerfectHashing{
     }
 	@Override
     public boolean search(String item){
-		int hash = hash_string(item);
+		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
 		return hashTable[hash] != null && hashTable[hash].equals(item);
     }
 
-	/**
-	 * Call this if a collision occurs in the secondary hash table at index to pick a different hash function for the table.
-	 *
-	 */
-	private void rebuild(){
+
+	private void rehash(String item){
+		ArrayList<String> newelements = new ArrayList<>();
+		for (int i = 0; i < elements.size(); i++) {
+			if (search(elements.get(i))){
+				newelements.add(elements.get(i));
+			}
+		}
+		hasher.newHashMatrix(Size);
+		int hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+		String[] newhashTable = new String[TSize];
+		newhashTable[hash] = item;
+		newelements.add(item);
+		for (int i = 0; i < newelements.size(); i++) {
+				hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(newelements.get(i))),2);
+				if (newhashTable[hash] == null){
+					newhashTable[hash] = newelements.get(i);
+				}
+				else{
+					hasher.newHashMatrix(Size);
+					hash = Integer.parseInt(hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item)),2);
+					newhashTable = new String[TSize];
+					newhashTable[hash] = item;
+					i = 0;
+					rebuildCount++;
+				}
+		}
+		hashTable = newhashTable;
+		elements = newelements;
 		rebuildCount++;
-		//Clear the secondary table and choose another hash function 
+		for (int i = 0; i < TSize; i++) {
+			if (hashTable[i] != null) {
+				System.out.println("index at " + i + " is :" + hashTable[i]);
+			}
+		}
 	}
 
-	/**
-	 * 
-	 * @return the number of rebuilds that happened in the second-level
-	 */
+
 	public int get_rebuild_count(){
 		return rebuildCount;
 	}
 
-	private int hash_string(String str) {
-		int code = 0;
-		final int base = 31; // Prime number for better distribution
 
-		for (int i = 0; i < str.length(); i++) {
-			code = (code * base + str.charAt(i));
-		}
-
-		return code;
-	}
 
 }
