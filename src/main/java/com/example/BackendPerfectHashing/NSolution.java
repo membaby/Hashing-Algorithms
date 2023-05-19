@@ -18,7 +18,7 @@ import java.util.*;
  */
 
 
-public class NSolution extends IPerfectHash{
+public class NSolution extends PerfectHashing{
 
 	private int rebuildCount = 0;
 	private int firstLevelSize;

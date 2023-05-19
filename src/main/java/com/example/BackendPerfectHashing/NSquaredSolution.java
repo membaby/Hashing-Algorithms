@@ -14,7 +14,7 @@ package com.example.BackendPerfectHashing;
  */
 
 
-public class NSquaredSolution extends IPerfectHash{
+public class NSquaredSolution extends PerfectHashing{
 
 	private int rebuildCount = 0;
 	private String[] hashTable;
