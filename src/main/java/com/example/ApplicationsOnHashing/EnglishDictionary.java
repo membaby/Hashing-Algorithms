@@ -8,9 +8,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class EnglishDictionary implements IDictionary {
+class EnglishDictionary implements IDictionary {
     private PerfectHashing perfectHashing;
-    public EnglishDictionary(String backendType, int tableSize){
+    EnglishDictionary(String backendType, int tableSize){
         // Construction: creates a new EnglishDictionary object, using the specified backend type.
         if (backendType.equals("1")) {
             perfectHashing = new NSquaredSolution(tableSize);

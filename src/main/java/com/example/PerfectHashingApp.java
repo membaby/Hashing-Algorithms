@@ -1,7 +1,6 @@
 package com.example;
 
 import com.example.ApplicationsOnHashing.DictionaryHandler;
-import com.example.ApplicationsOnHashing.EnglishDictionary;
 import com.example.BackendPerfectHashing.UniverseHashing;
 
 import java.io.IOException;
@@ -51,7 +50,6 @@ public class PerfectHashingApp
 
         //CLI implementation
         Scanner scanner = new Scanner(System.in);
-        EnglishDictionary englishDictionary ;
         String tableChoice = "";
         String methodChoice = "";
         int tableSize = 0;
