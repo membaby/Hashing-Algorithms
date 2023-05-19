@@ -8,6 +8,6 @@ public class PerfectHashingApp
 {
     public static void main( String[] args )
     {
-        //this main method is to take user input and talk to CLI class
+        System.out.println( "Hello World!" );
     }
 }
