@@ -12,9 +12,9 @@ public class EnglishDictionary implements IDictionary {
     private PerfectHashing perfectHashing;
     public EnglishDictionary(String backendType, int tableSize){
         // Construction: creates a new EnglishDictionary object, using the specified backend type.
-        if (backendType.equals("O(N2)")) {
+        if (backendType.equals("1")) {
             perfectHashing = new NSquaredSolution(tableSize);
-        } else if (backendType.equals("O(N)")) {
+        } else if (backendType.equals("2")) {
             perfectHashing = new NSolution(tableSize);
         } else {
             throw new IllegalArgumentException("Invalid backend type: " + backendType);
