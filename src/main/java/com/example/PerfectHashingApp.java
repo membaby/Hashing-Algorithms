@@ -20,7 +20,7 @@ public class PerfectHashingApp
         System.out.println("1. O(N2) solution");
         System.out.println("2. O(N) solution");
         System.out.println("3. Exit");
-        System.out.println("Choose your hash method: ");
+        System.out.print("Choose your hash method: ");
     }
     public static void printActionMenu(){
         System.out.println("Choices");
@@ -29,23 +29,24 @@ public class PerfectHashingApp
         System.out.println("3. Search for a word");
         System.out.println("4. Batch insert");
         System.out.println("5. Batch delete");
-        System.out.println("6. Exit");
-        System.out.println("Enter an action to perform: ");
+        System.out.println("6. Main Menu");
+        System.out.println("7. Exit");
+        System.out.print("Enter an action to perform: ");
     }
 
     public static void main( String[] args ) throws IOException, InterruptedException {
-        UniverseHashing universeHashing = new UniverseHashing();
-        String binaryString = universeHashing.hash_string("hellothisisatest");
-        System.out.println(binaryString);
-        universeHashing.newHashMatrix(100);
-        System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
-        int digest = universeHashing.hash(universeHashing.getHashMatrix() , binaryString);
-        System.out.println(digest);
-        binaryString = universeHashing.hash_string("world");
-        System.out.println(binaryString);
-        System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
-        digest = universeHashing.hash(universeHashing.getHashMatrix(),binaryString);
-        System.out.println(digest);
+//        UniverseHashing universeHashing = new UniverseHashing();
+//        String binaryString = universeHashing.hash_string("hellothisisatest");
+//        System.out.println(binaryString);
+//        universeHashing.newHashMatrix(10000);
+//        System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
+//        int digest = universeHashing.hash(universeHashing.getHashMatrix() , binaryString);
+//        System.out.println(digest);
+//        binaryString = universeHashing.hash_string("world");
+//        System.out.println(binaryString);
+//        System.out.println(Arrays.deepToString(universeHashing.getHashMatrix()));
+//        digest = universeHashing.hash(universeHashing.getHashMatrix(),binaryString);
+//        System.out.println(digest);
 
 
         //CLI implementation
@@ -55,7 +56,7 @@ public class PerfectHashingApp
         int tableSize = 0;
         printTableMenu();
         tableChoice = scanner.next();
-        System.out.println("Enter the size of the hash table: ");
+        System.out.print("Enter the size of the hash table: ");
         tableSize = scanner.nextInt();
         DictionaryHandler dictionaryHandler = new DictionaryHandler(tableSize, tableChoice);
         while(true)
