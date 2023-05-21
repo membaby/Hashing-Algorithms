@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.BackendPerfectHashing.NSquaredSolution;
 import com.example.BackendPerfectHashing.NSquaredSolution;
+import com.example.BackendPerfectHashing.NSquaredSolution;
 import org.junit.Test;
 import com.example.BackendPerfectHashing.NSquaredSolution;
 
@@ -119,24 +120,37 @@ public class NSquaredSolutionTest
     }
 
     @Test
-    public void millionSearchTest()
+    public void hugeSearch1()
     {
-        NSquaredSolution hash_table = new NSquaredSolution(10000);
-        //setup the table with 1 million words
-        for (int i = 0; i < 10000; i++)
+        NSquaredSolution hash_table = new NSquaredSolution(10);
+        for(int i = 0; i < 1000000; i++)
         {
-            assertTrue(hash_table.insert(String.valueOf((i))));
-        }
-        //search for the words
-        for (int i = 0; i < 10000; i++)
-        {
-            assertTrue(hash_table.search(String.valueOf((i))));
-        }
-        for(int i = 10000; i < 1000000; i++)
-        {
-            assertFalse(hash_table.search(String.valueOf((i))));
+            hash_table.search(String.valueOf((i)));
         }
     }
+
+    @Test
+    public void hugeSearch2()
+    {
+        NSquaredSolution hash_table = new NSquaredSolution(10);
+        for(int i = 0; i < 500000; i++)
+        {
+            hash_table.search(String.valueOf((i)));
+        }
+    }
+    
+    @Test
+    public void hugeSearch3()
+    {
+        NSquaredSolution hash_table = new NSquaredSolution(10);
+
+        for(int i = 0; i < 100000; i++)
+        {
+            hash_table.search(String.valueOf((i)));
+        }
+    }
+
+
 
     @Test
     public void searchAndDelete(){

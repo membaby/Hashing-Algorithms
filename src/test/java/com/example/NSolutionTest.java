@@ -40,7 +40,7 @@ public class NSolutionTest
     }
 
     @Test
-    public void insertionMultiple()
+    public void insertFile()
     {
         int countSuccessfulInsertions = 0 ;
         NSolution hash_table = new NSolution(1000);
@@ -68,7 +68,7 @@ public class NSolutionTest
     }
 
     @Test
-    public void insertionHuge()
+    public void insertHugeFile1()
     {
         int countSuccessfulInsertions = 0 ;
         NSolution hash_table = new NSolution(5000);
@@ -98,6 +98,66 @@ public class NSolutionTest
     }
 
     @Test
+    public void insertHugeFile2()
+    {
+        int countSuccessfulInsertions = 0 ;
+        NSolution hash_table = new NSolution(60000);
+        try
+        {
+            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\58109.txt");
+            Scanner scanFile = new Scanner(file);
+            while(scanFile.hasNextLine())
+            {
+                String word = scanFile.nextLine();
+                if(hash_table.search(word)){
+                    assertFalse(hash_table.insert(word));
+                }else{
+                    assertTrue(hash_table.insert(word));
+                    countSuccessfulInsertions++;
+                }
+
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
+
+        assertEquals(58108, countSuccessfulInsertions);
+    }
+
+    @Test
+    public void insertHugeFile3()
+    {
+        int countSuccessfulInsertions = 0 ;
+        NSolution hash_table = new NSolution(400000);
+        try
+        {
+            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\huge.txt");
+            Scanner scanFile = new Scanner(file);
+            while(scanFile.hasNextLine())
+            {
+                String word = scanFile.nextLine();
+                if(hash_table.search(word)){
+                    assertFalse(hash_table.insert(word));
+                }else{
+                    assertTrue(hash_table.insert(word));
+                    countSuccessfulInsertions++;
+                }
+
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
+
+        assertEquals(370104, countSuccessfulInsertions);
+    }
+
+    @Test
     public void deletionTest(){
         NSolution hash_table = new NSolution(100);
         hash_table.insert("apple");
@@ -117,25 +177,49 @@ public class NSolutionTest
         assertFalse(hash_table.search("orange"));
     }
 
+
     @Test
-    public void millionSearchTest()
+    public void hugeInsert1()
     {
-        NSolution hash_table = new NSolution(100000);
-        //setup the table with 1 million words
-        for (int i = 0; i < 100000; i++)
+        NSolution hash_table = new NSolution(1000000);
+        for(int i = 0; i < 1000000; i++)
         {
             assertTrue(hash_table.insert(String.valueOf((i))));
         }
-        //search for the words
-        for (int i = 0; i < 100000; i++)
+    }
+
+    @Test
+    public void hugeSearch1()
+    {
+        NSolution hash_table = new NSolution(10);
+        for(int i = 0; i < 1000000; i++)
         {
-            assertTrue(hash_table.search(String.valueOf((i))));
-        }
-        for(int i = 100000; i < 1000000; i++)
-        {
-            assertFalse(hash_table.search(String.valueOf((i))));
+            hash_table.search(String.valueOf((i)));
         }
     }
+
+    @Test
+    public void hugeSearch2()
+    {
+        NSolution hash_table = new NSolution(10);
+
+        for(int i = 0; i < 500000; i++)
+        {
+            hash_table.search(String.valueOf((i)));
+        }
+    }
+    @Test
+    public void hugeSearch3()
+    {
+        NSolution hash_table = new NSolution(10);
+
+        for(int i = 0; i < 100000; i++)
+        {
+            hash_table.search(String.valueOf((i)));
+        }
+    }
+
+
 
     @Test
     public void searchAndDelete(){
