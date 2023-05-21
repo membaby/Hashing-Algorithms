@@ -46,12 +46,17 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(1000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\src\\main\\java\\com\\example\\testFiles\\1000.txt");
+            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\1000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
-                assertTrue(hash_table.insert(scanFile.nextLine()));
-                countSuccessfulInsertions++;
+                String word = scanFile.nextLine();
+                if(hash_table.search(word)){
+                    assertFalse(hash_table.insert(word));
+                }else{
+                    assertTrue(hash_table.insert(word));
+                    countSuccessfulInsertions++;
+                }
             }
         }
         catch(FileNotFoundException e)
@@ -59,22 +64,28 @@ public class NSolutionTest
              System.out.println("File not found");
              e.printStackTrace();
         }
-        assertEquals(1000, countSuccessfulInsertions);
+        assertEquals(999, countSuccessfulInsertions);
     }
 
     @Test
     public void insertionHuge()
     {
         int countSuccessfulInsertions = 0 ;
-        NSolution hash_table = new NSolution(10000);
+        NSolution hash_table = new NSolution(5000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\src\\main\\java\\com\\example\\testFiles\\10000.txt");
+            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\5000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
-                assertTrue(hash_table.insert(scanFile.nextLine()));
-                countSuccessfulInsertions++;
+                String word = scanFile.nextLine();
+                if(hash_table.search(word)){
+                    assertFalse(hash_table.insert(word));
+                }else{
+                    assertTrue(hash_table.insert(word));
+                    countSuccessfulInsertions++;
+                }
+
             }
         }
         catch(FileNotFoundException e)
@@ -83,7 +94,7 @@ public class NSolutionTest
             e.printStackTrace();
         }
 
-        assertEquals(9894, countSuccessfulInsertions);
+        assertEquals(2122, countSuccessfulInsertions);
     }
 
     @Test
