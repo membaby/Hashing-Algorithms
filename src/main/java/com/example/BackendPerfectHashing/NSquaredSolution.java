@@ -22,7 +22,7 @@ public class NSquaredSolution extends PerfectHashing{
 	// Constructor
 	public NSquaredSolution(int size) {
 		Size = size*size;
-		TSize = getP2(Size);
+		TSize = Size;
 		hashTable = new String[TSize];
 		hasher.newHashMatrix(Size);
 	}
@@ -35,7 +35,7 @@ public class NSquaredSolution extends PerfectHashing{
 			hashTable[hash] = item;
 			return true;
 		} else {
-			if (hashTable[hash] != item){
+			if (!hashTable[hash].equals(item)){
 				rehash(item);
 				return true;
 			}
