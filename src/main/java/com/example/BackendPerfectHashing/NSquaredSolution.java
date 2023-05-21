@@ -75,24 +75,27 @@ public class NSquaredSolution extends PerfectHashing{
 		}
 		hasher.newHashMatrix(TSize);
 		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
-		String[] newhashTable = new String[TSize];
-		newhashTable[hash] = item;
+		String[] New_hashTable = new String[TSize];
+		New_hashTable[hash] = item;
 		newelements.add(item);
 		for (int i = 0; i < newelements.size(); i++) {
 				hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(newelements.get(i)));
-				if (newhashTable[hash] == null){
-					newhashTable[hash] = newelements.get(i);
+				if (New_hashTable[hash] == null){
+					New_hashTable[hash] = newelements.get(i);
 				}
-				else{
+				else if (!New_hashTable[hash].equals(newelements.get(i))){
+					/*System.out.println("word in table is:"+New_hashTable[hash]+" /binary value is:"+hasher.hash_string(New_hashTable[hash]));
+					System.out.println("word to be added:"+newelements.get(i)+" /binary value is:"+hasher.hash_string(newelements.get(i)));
+					*/
 					hasher.newHashMatrix(TSize);
 					hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
-					newhashTable = new String[TSize];
-					newhashTable[hash] = item;
+					New_hashTable = new String[TSize];
+					New_hashTable[hash] = item;
 					i = 0;
 					rebuildCount++;
 				}
 		}
-		hashTable = newhashTable;
+		hashTable = New_hashTable;
 		elements = newelements;
 		rebuildCount++;
 	}

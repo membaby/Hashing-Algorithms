@@ -870,7 +870,6 @@ note
 hop
 expand
 powder
-functional
 adventurous
 manage
 zoo
@@ -1425,7 +1424,6 @@ harass
 electric
 hateful
 hypnotic
-expensive
 demonic
 fuzzy
 open
@@ -3306,7 +3304,6 @@ satisfying
 rustic
 suit
 comb
-functional
 joke
 chunky
 kittens
@@ -4558,7 +4555,6 @@ spade
 prick
 tightfisted
 pull
-functional
 verse
 punch
 need

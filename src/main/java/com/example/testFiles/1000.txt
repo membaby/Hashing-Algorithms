@@ -83,7 +83,6 @@ slip
 receptive
 view
 cough
-functional
 marry
 exultant
 careless
@@ -228,8 +227,7 @@ tap
 maddening
 cover
 marble
-expensive
-horses
+shorsess
 knot
 teeny
 mine
