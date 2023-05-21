@@ -25,8 +25,7 @@ public class NSolution extends PerfectHashing{
     public boolean insert(String key)
 	{
 		String binaryStr = hashFunc.hash_string(key);
-        int index = 0;
-		index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 		boolean res = table[index].insert(key);
 		if (res) size++;
 		return res;
@@ -35,8 +34,7 @@ public class NSolution extends PerfectHashing{
     public boolean delete(String key)
 	{
 		String binaryStr = hashFunc.hash_string(key);
-        int index = 0;
-		index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 		boolean res = table[index].delete(key);
 		if (res) size--;
 		return res;
@@ -44,8 +42,7 @@ public class NSolution extends PerfectHashing{
 
     public boolean search(String key){
         String binaryStr = hashFunc.hash_string(key);
-        int index = 0;
-		index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 		
         return table[index].search(key);
     }
@@ -66,15 +63,21 @@ public class NSolution extends PerfectHashing{
 	{
 		private int prevRebuildCount;
 		private int entryCount = 0;
-		String[] table = new String[0];
-		UniverseHashing hashFunc = new UniverseHashing();
+		String[] table;
+		UniverseHashing hashFunc;
+
+		public Lvl2Table()
+		{
+			table = new String[1];
+			hashFunc = new UniverseHashing();
+			hashFunc.newHashMatrix(1);
+		}
 
 
 		public boolean insert(String key)
 		{
 			String binaryStr = hashFunc.hash_string(key);
-			int index = 0;
-			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			//If key already exists
 			if(search(key))	return false;
 			entryCount++;
@@ -92,10 +95,8 @@ public class NSolution extends PerfectHashing{
 
 		public boolean search(String key)
 		{
-			if (table.length == 0) return false;
 			String binaryStr = hashFunc.hash_string(key);
-			int index = 0;
-			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			return table[index].equals(key);
 		}
 
@@ -103,8 +104,7 @@ public class NSolution extends PerfectHashing{
 		{
 			if (!search(key)) return false;
 			String binaryStr = hashFunc.hash_string(key);
-			int index = 0;
-			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			table[index] = null;
 			entryCount -= 1;
 			return true;
