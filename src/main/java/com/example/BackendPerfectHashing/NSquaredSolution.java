@@ -5,7 +5,6 @@ public class NSquaredSolution extends PerfectHashing{
 
 	private int rebuildCount = 0;
 	private String[] hashTable;
-	private int Size;
 	private int TSize;
 	private UniverseHashing hasher = new UniverseHashing();
 	private ArrayList<String> elements = new ArrayList<>();
@@ -21,10 +20,9 @@ public class NSquaredSolution extends PerfectHashing{
 
 	// Constructor
 	public NSquaredSolution(int size) {
-		Size = size*size;
-		TSize = Size;
+		TSize = size*size;
 		hashTable = new String[TSize];
-		hasher.newHashMatrix(Size);
+		hasher.newHashMatrix(TSize);
 	}
 
 	@Override
@@ -33,10 +31,20 @@ public class NSquaredSolution extends PerfectHashing{
 		if (hashTable[hash] == null){
 			elements.add(item);
 			hashTable[hash] = item;
+			/*for (int i = 0; i < hashTable.length; i++) {
+				if (hashTable[i] != null) {
+					System.out.println("index " + i + " ---> " + hashTable[i]);
+				}
+			}*/
 			return true;
 		} else {
 			if (!hashTable[hash].equals(item)){
 				rehash(item);
+				/*for (int i = 0; i < hashTable.length; i++) {
+					if (hashTable[i] != null) {
+						System.out.println("index " + i + " ---> " + hashTable[i]);
+					}
+				}*/
 				return true;
 			}
 			return false;
@@ -65,7 +73,7 @@ public class NSquaredSolution extends PerfectHashing{
 				newelements.add(elements.get(i));
 			}
 		}
-		hasher.newHashMatrix(Size);
+		hasher.newHashMatrix(TSize);
 		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 		String[] newhashTable = new String[TSize];
 		newhashTable[hash] = item;
@@ -76,7 +84,7 @@ public class NSquaredSolution extends PerfectHashing{
 					newhashTable[hash] = newelements.get(i);
 				}
 				else{
-					hasher.newHashMatrix(Size);
+					hasher.newHashMatrix(TSize);
 					hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 					newhashTable = new String[TSize];
 					newhashTable[hash] = item;
