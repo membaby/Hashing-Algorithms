@@ -3,7 +3,7 @@ import java.util.*;
 
 public class NSolution extends PerfectHashing{
 
-	private int size;
+	private int size = 0;
 	private Lvl2Table[] table;
 	UniverseHashing hashFunc;
 
@@ -12,14 +12,13 @@ public class NSolution extends PerfectHashing{
 	{
 		
 		size = 1 << log2(size);
-		this.size = size;
 		table = new Lvl2Table[size];
 		for (int i=0; i<size; i++)
 		{
 			table[i] = new Lvl2Table();
 		}
 		hashFunc = new UniverseHashing();
-		hashFunc.newHashMatrix(this.size);
+		hashFunc.newHashMatrix(size);
 	}
 
 	@Override
@@ -27,27 +26,31 @@ public class NSolution extends PerfectHashing{
 	{
 		String binaryStr = hashFunc.hash_string(key);
         int index = 0;
-		// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
-		
-		return table[index].insert(key);
+		index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		boolean res = table[index].insert(key);
+		if (res) size++;
+		return res;
     }
 	
     public boolean delete(String key)
 	{
 		String binaryStr = hashFunc.hash_string(key);
         int index = 0;
-		// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
-		
-        return table[index].delete(key);
+		index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		boolean res = table[index].delete(key);
+		if (res) size--;
+		return res;
     }
 
     public boolean search(String key){
         String binaryStr = hashFunc.hash_string(key);
         int index = 0;
-		// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 		
         return table[index].search(key);
     }
+
+	public int size() {return size;}
 
 	private int log2(int x)
 	{
@@ -71,22 +74,18 @@ public class NSolution extends PerfectHashing{
 		{
 			String binaryStr = hashFunc.hash_string(key);
 			int index = 0;
-			// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			//If key already exists
-			if(search(key))
-			{
-				return false;
-			}
+			if(search(key))	return false;
 			entryCount++;
-			for (int i=0; i<table.length; i++)
+			//If no collision then don't rebuild
+			if (table[index] == null)
 			{
-				if (table[i] == null)
-				{
-					table[i] = key;
-					break;
-				}
+				table[index] = key;
+				return true;
 			}
-			rebuild();
+			
+			rebuild(key);
 			
 			return true;
 		}
@@ -95,7 +94,7 @@ public class NSolution extends PerfectHashing{
 		{
 			String binaryStr = hashFunc.hash_string(key);
 			int index = 0;
-			// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			return table[index].equals(key);
 		}
 
@@ -104,17 +103,18 @@ public class NSolution extends PerfectHashing{
 			if (!search(key)) return false;
 			String binaryStr = hashFunc.hash_string(key);
 			int index = 0;
-			// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			table[index] = null;
 			entryCount -= 1;
 			return true;
 		}
 
-		private void rebuild()
+		private void rebuild(String newKey)
 		{
 			String[] allEntries = new String[entryCount];
-			int j = 0;
-			for (int i=0; i<table.length; i++)
+			allEntries[0] = newKey;
+			int j = 1;
+			for (int i=0; i<table.length && j<entryCount; i++)
 			{
 				if (table[i] != null)
 				{
@@ -136,7 +136,7 @@ public class NSolution extends PerfectHashing{
 				{
 					String binaryStr = hashFunc.hash_string(allEntries[j]);
 					int index = 0;
-					// index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+					index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 					if (table[index] != null) continue findingNoCollisionsFunc;
 				}	
 				break;
