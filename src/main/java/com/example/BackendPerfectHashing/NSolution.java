@@ -173,12 +173,19 @@ public class NSolution extends PerfectHashing{
 					String binaryStr = hashFunc.hash_string(allEntries[j]);
 					int index = 0;
 					index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
-					if (table[index] != null) continue findingNoCollisionsFunc;
+					if (table[index] != null)
+					{
+						if (hashFunc.hash_string(newKey).equals(hashFunc.hash_string(table[index])))
+						{
+							//two strings with same hashcode
+							hashFunc.newHashBase();
+						}
+						continue findingNoCollisionsFunc;
+					} 
 					table[index] = allEntries[j];
 				}	
 				break;
 			}
-			int debug = 0;
 		}
 
 		public int get_prev_rebuilds(){return prevRebuildCount;}
