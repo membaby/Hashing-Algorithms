@@ -8,10 +8,41 @@ public class UniverseHashing
     private int b = 0 ;
     private int[][] currentHashMatrix;
     private int tableSize;
+    private int hashBase = 31;
 
     public int[][] getHashMatrix()
     {
         return this.currentHashMatrix;
+    }
+
+    public int getHashBase()
+    {
+        return this.hashBase;
+    }
+
+    private boolean isPrime(int n)
+    {
+        for(int i = 1 ; i < n ; i++)
+        {
+            if(n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void newHashBase()
+    {
+        //make prime hash base
+        while(true)
+        {
+            this.hashBase = (int) (Math.random() * 256 + 1);
+            if(isPrime(this.hashBase))
+            {
+                break;
+            }
+        }
     }
 
     public void newHashMatrix(int tableSize)
@@ -31,7 +62,6 @@ public class UniverseHashing
             }
         }
         this.currentHashMatrix = hashMatrix;
-
     }
 
     public String hash_string(String str)
@@ -39,7 +69,7 @@ public class UniverseHashing
         long code = 0;
         for (int i=0; i < str.length(); i++)
         {
-            code = code * 128 + str.charAt(i);
+            code = code * this.hashBase + str.charAt(i);
         }
         return Long.toBinaryString(code);
     }

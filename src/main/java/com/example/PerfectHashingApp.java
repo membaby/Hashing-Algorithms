@@ -34,6 +34,7 @@ public class PerfectHashingApp
     {
 
         //CLI implementation
+
         Scanner scanner = new Scanner(System.in);
         String tableChoice = "";
         String methodChoice = "";

@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.BackendPerfectHashing.NSolution;
+import com.example.BackendPerfectHashing.NSquaredSolution;
 import com.example.BackendPerfectHashing.NSquaredSolution;
 import org.junit.Test;
 import com.example.BackendPerfectHashing.NSquaredSolution;
@@ -158,5 +158,29 @@ public class NSquaredSolutionTest
         {
             assertTrue(hash_table.delete(String.valueOf((i))));
         }
+    }
+
+    @Test
+    //number of times needed to rebuild the hash table in case of collision
+    public void rebuildTest(){
+        NSquaredSolution hash_table = new NSquaredSolution(100);
+        hash_table.insert("apple");
+        hash_table.insert("banana");
+        hash_table.insert("cherry");
+        hash_table.insert("orange");
+        hash_table.insert("grape");
+//        assertThat(hash_table.getRebuildCount(), is(1));
+    }
+
+    @Test
+    //test space of the hash table
+    public void spaceTest(){
+        NSquaredSolution hash_table = new NSquaredSolution(100);
+        hash_table.insert("apple");
+        hash_table.insert("banana");
+        hash_table.insert("cherry");
+        hash_table.insert("orange");
+        hash_table.insert("grape");
+//        assertThat(hash_table.getSpace(), is(5));
     }
 }

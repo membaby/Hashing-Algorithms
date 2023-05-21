@@ -157,4 +157,28 @@ public class NSolutionTest
             assertTrue(hash_table.delete(String.valueOf((i))));
         }
     }
+
+    @Test
+    //number of times needed to rebuild the hash table in case of collision
+    public void rebuildTest(){
+        NSolution hash_table = new NSolution(100);
+        hash_table.insert("apple");
+        hash_table.insert("banana");
+        hash_table.insert("cherry");
+        hash_table.insert("orange");
+        hash_table.insert("grape");
+//        assertThat(hash_table.getRebuildCount(), is(1));
+    }
+
+    @Test
+    //test space of the hash table
+    public void spaceTest(){
+        NSolution hash_table = new NSolution(100);
+        hash_table.insert("apple");
+        hash_table.insert("banana");
+        hash_table.insert("cherry");
+        hash_table.insert("orange");
+        hash_table.insert("grape");
+//        assertThat(hash_table.getSpace(), is(5));
+    }
 }
