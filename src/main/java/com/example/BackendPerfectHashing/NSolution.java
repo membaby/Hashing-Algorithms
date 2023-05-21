@@ -52,9 +52,9 @@ public class NSolution extends PerfectHashing{
 	private int log2(int x)
 	{
 		int log = 0;
-		for (;size > 0; log++)
+		for (;x > 0; log++)
 		{
-			size = size >> 1;
+			x = x >> 1;
 		}
 		return log;
 	}
@@ -97,6 +97,7 @@ public class NSolution extends PerfectHashing{
 		{
 			String binaryStr = hashFunc.hash_string(key);
 			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			if (table[index] == null) return false;
 			return table[index].equals(key);
 		}
 
