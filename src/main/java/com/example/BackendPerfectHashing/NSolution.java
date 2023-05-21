@@ -11,7 +11,7 @@ public class NSolution extends PerfectHashing{
 	public NSolution(int size) 
 	{
 		
-		size = 1 << log2(size);
+		size = 1 << (log2(size) + 1);
 		table = new Lvl2Table[size];
 		for (int i=0; i<size; i++)
 		{
@@ -51,7 +51,7 @@ public class NSolution extends PerfectHashing{
 
 	private int log2(int x)
 	{
-		int log = 0;
+		int log = -1;
 		for (;x > 0; log++)
 		{
 			x = x >> 1;
@@ -76,6 +76,7 @@ public class NSolution extends PerfectHashing{
 
 		public boolean insert(String key)
 		{
+			prevRebuildCount = 0;
 			String binaryStr = hashFunc.hash_string(key);
 			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 			//If key already exists
@@ -89,6 +90,26 @@ public class NSolution extends PerfectHashing{
 			}
 			
 			rebuild(key);
+
+			//Comparing entry count to number of non null entries
+			int count = 0;
+			for (String entry : table) {
+				if (entry != null) count++;
+			}
+			if (count != entryCount)
+			{
+				//Problems
+				System.out.printf("Something went wrong during this insert.\n");
+				System.out.printf("table length = %d. entryCount = %d\n", table.length, entryCount);
+				System.out.printf("table contents: ");
+				for (String string : table)System.out.printf(string + ", ");
+				System.out.printf("\n");
+				System.out.printf("New key = %s\n", key);
+				System.out.println("Lvl 1 size = " + size);
+				System.out.println("Rebuild count = " + prevRebuildCount);
+				System.out.println();
+
+			}
 			
 			return true;
 		}
@@ -116,7 +137,7 @@ public class NSolution extends PerfectHashing{
 			String[] allEntries = new String[entryCount];
 			allEntries[0] = newKey;
 			int j = 1;
-			for (int i=0; i<table.length && j<entryCount; i++)
+			for (int i=0; i<table.length; i++)
 			{
 				if (table[i] != null)
 				{
@@ -124,25 +145,40 @@ public class NSolution extends PerfectHashing{
 					j++;
 				}
 			}
+			if (j != entryCount)
+			{
+				System.out.printf("allEntries didn't fill up properly.\n");
+				System.out.printf("table length = %d. j = %d. entryCount = %d\n", table.length, j, entryCount);
+				System.out.printf("table contents: ");
+				for (String string : table)System.out.printf(string + ", ");
+				System.out.printf("\nallEntries contents: ");
+				for (String string : allEntries) System.out.printf(string + ", ");
+				System.out.println("Size = " + size);
+			} 
 			
-			int size = 1 << log2(entryCount*entryCount);
+			int log = log2(entryCount*entryCount);
+			int size = 1 << (log+1);
 			table = new String[size];
-			prevRebuildCount = -1;
+			prevRebuildCount = 0;
 			findingNoCollisionsFunc:
 			while(true)
 			{
 				prevRebuildCount++;
 				hashFunc.newHashMatrix(table.length);
-				Arrays.fill(table, null);
+				table = new String[size];
 				for (j=0; j<entryCount; j++)
 				{
+					// if (allEntries[j] == null) System.out.println("Is null");
+					// else System.out.println(allEntries[j]);
 					String binaryStr = hashFunc.hash_string(allEntries[j]);
 					int index = 0;
 					index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 					if (table[index] != null) continue findingNoCollisionsFunc;
+					table[index] = allEntries[j];
 				}	
 				break;
 			}
+			int debug = 0;
 		}
 
 		public int get_prev_rebuilds(){return prevRebuildCount;}
