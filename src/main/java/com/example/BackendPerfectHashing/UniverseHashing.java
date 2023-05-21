@@ -24,7 +24,7 @@ public class UniverseHashing
     {
         for(int i = 1 ; i < n ; i++)
         {
-            if(n % i == 0)
+            if(n % i == 0 && i != 1)
             {
                 return false;
             }
@@ -34,12 +34,14 @@ public class UniverseHashing
 
     public void newHashBase()
     {
+        int test = 0 ;
         //make prime hash base
         while(true)
         {
-            this.hashBase = (int) (Math.random() * 256 + 1);
-            if(isPrime(this.hashBase))
+            test = (int) (Math.random() * 256  + 1);
+            if(isPrime(test))
             {
+                this.hashBase = test;
                 break;
             }
         }
