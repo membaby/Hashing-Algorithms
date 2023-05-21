@@ -158,6 +158,35 @@ public class NSolutionTest
     }
 
     @Test
+    public void insertHugeFile4()
+    {
+        int countSuccessfulInsertions = 0 ;
+        NSolution hash_table = new NSolution(1200000);
+        try
+        {
+            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\million.txt");
+            Scanner scanFile = new Scanner(file);
+            while(scanFile.hasNextLine())
+            {
+                String word = scanFile.nextLine();
+                if(hash_table.search(word)){
+                    assertFalse(hash_table.insert(word));
+                }else{
+                    assertTrue(hash_table.insert(word));
+                    countSuccessfulInsertions++;
+                }
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("File not found");
+            e.printStackTrace();
+        }
+
+        assertEquals(370104, countSuccessfulInsertions);
+    }
+
+    @Test
     public void deletionTest(){
         NSolution hash_table = new NSolution(100);
         hash_table.insert("apple");
