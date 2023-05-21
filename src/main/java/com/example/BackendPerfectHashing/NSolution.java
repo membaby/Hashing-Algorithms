@@ -92,6 +92,7 @@ public class NSolution extends PerfectHashing{
 
 		public boolean search(String key)
 		{
+			if (table.length == 0) return false;
 			String binaryStr = hashFunc.hash_string(key);
 			int index = 0;
 			index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
