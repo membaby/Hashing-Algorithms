@@ -39,7 +39,7 @@ public class UniverseHashing
         long code = 0;
         for (int i=0; i < str.length(); i++)
         {
-            code += str.charAt(i)*Math.pow(128, i);
+            code = code * 128 + str.charAt(i);
         }
         return Long.toBinaryString(code);
     }
