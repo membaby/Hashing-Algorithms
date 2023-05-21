@@ -9,6 +9,7 @@ foot
 carriage
 price
 balance
+expensive
 plough
 shave
 pest
@@ -1834,6 +1835,7 @@ coordinated
 realize
 burly
 pretend
+functional
 obese
 comfortable
 want

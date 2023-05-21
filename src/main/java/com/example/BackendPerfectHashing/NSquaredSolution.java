@@ -23,6 +23,7 @@ public class NSquaredSolution extends PerfectHashing{
 		TSize = size*size;
 		hashTable = new String[TSize];
 		hasher.newHashMatrix(TSize);
+		hasher.newHashBase();
 	}
 
 	@Override
@@ -84,15 +85,20 @@ public class NSquaredSolution extends PerfectHashing{
 					New_hashTable[hash] = newelements.get(i);
 				}
 				else if (!New_hashTable[hash].equals(newelements.get(i))){
-					/*System.out.println("word in table is:"+New_hashTable[hash]+" /binary value is:"+hasher.hash_string(New_hashTable[hash]));
+					System.out.println("word in table is:"+New_hashTable[hash]+" /binary value is:"+hasher.hash_string(New_hashTable[hash]));
 					System.out.println("word to be added:"+newelements.get(i)+" /binary value is:"+hasher.hash_string(newelements.get(i)));
-					*/
-					hasher.newHashMatrix(TSize);
-					hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
-					New_hashTable = new String[TSize];
-					New_hashTable[hash] = item;
-					i = 0;
-					rebuildCount++;
+					if (hasher.hash_string(New_hashTable[hash]).equals(hasher.hash_string(newelements.get(i)))){
+						hasher.newHashBase();
+					}
+					else {
+						hasher.newHashBase();
+						hasher.newHashMatrix(TSize);
+						hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+						New_hashTable = new String[TSize];
+						New_hashTable[hash] = item;
+						i = 0;
+						rebuildCount++;
+					}
 				}
 		}
 		hashTable = New_hashTable;
