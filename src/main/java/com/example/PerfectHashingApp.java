@@ -35,13 +35,6 @@ public class PerfectHashingApp
 
         //CLI implementation
 
-        UniverseHashing universeHashing = new UniverseHashing();
-        for(int i = 0; i < 100; i++)
-        {
-           universeHashing.newHashBase();
-           System.out.println(universeHashing.getHashBase());
-        }
-
         Scanner scanner = new Scanner(System.in);
         String tableChoice = "";
         String methodChoice = "";
