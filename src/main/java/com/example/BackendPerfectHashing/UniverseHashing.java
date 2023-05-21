@@ -66,7 +66,6 @@ public class UniverseHashing
             digest += hx[i];
         }
 
-        System.out.println(digest);
         return Integer.parseInt(digest, 2) % this.tableSize;
     }
 }

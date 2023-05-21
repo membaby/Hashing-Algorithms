@@ -1,5 +1,7 @@
 package com.example.ApplicationsOnHashing;
 
+import com.example.PerfectHashingApp;
+
 import java.util.Scanner;
 
 public class DictionaryHandler
@@ -54,6 +56,10 @@ public class DictionaryHandler
                 count = englishDictionary.batchDelete(filePath);
                 System.out.println(count + " words deleted successfully");
                 break;
+            case "6":
+                PerfectHashingApp.main(null);
+            case "7":
+                System.exit(0);
             default:
                 System.out.println("Invalid choice");
                 break;

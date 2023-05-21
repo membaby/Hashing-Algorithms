@@ -3,10 +3,10 @@ package com.example.ApplicationsOnHashing;
 import com.example.BackendPerfectHashing.NSolution;
 import com.example.BackendPerfectHashing.NSquaredSolution;
 import com.example.BackendPerfectHashing.PerfectHashing;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.List;
+import java.util.Scanner;
 
 class EnglishDictionary implements IDictionary {
     private PerfectHashing perfectHashing;
@@ -16,6 +16,8 @@ class EnglishDictionary implements IDictionary {
             perfectHashing = new NSquaredSolution(tableSize);
         } else if (backendType.equals("2")) {
             perfectHashing = new NSolution(tableSize);
+        } else if (backendType.equals("3")){
+            System.exit(0);
         } else {
             throw new IllegalArgumentException("Invalid backend type: " + backendType);
         }
@@ -39,11 +41,45 @@ class EnglishDictionary implements IDictionary {
 
     //will return the number of words successfully inserted
     public int batchInsert(String filePath){
-        return 0;
+        int countSuccessfulInsertions = 0 ;
+        try
+        {
+            File file = new File(filePath);
+            Scanner scanFile = new Scanner(file);
+            while(scanFile.hasNextLine())
+            {
+                if(this.perfectHashing.insert(scanFile.nextLine()))
+                {
+                    countSuccessfulInsertions ++;
+                }
+
+            }
+
+        }catch (FileNotFoundException e){
+            System.out.println(filePath + "is not found");
+            e.printStackTrace();
+        }
+        return countSuccessfulInsertions;
     }
 
     //will return the number of words successfully deleted
     public int batchDelete(String filePath){
-        return 0;
+        int countSuccessfulDeletions = 0 ;
+        try
+        {
+            File file = new File(filePath);
+            Scanner scanFile = new Scanner(file);
+            while(scanFile.hasNextLine())
+            {
+                if(this.perfectHashing.delete(scanFile.nextLine()))
+                {
+                    countSuccessfulDeletions ++;
+                }
+            }
+        }catch (FileNotFoundException e){
+            System.out.println(filePath + "is not found");
+            e.printStackTrace();
+        }
+        return countSuccessfulDeletions;
     }
 }
