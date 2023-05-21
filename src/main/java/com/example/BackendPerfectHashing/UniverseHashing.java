@@ -18,7 +18,7 @@ public class UniverseHashing
     {
         //number of rows | index size
         this.tableSize = tableSize;
-        int b = (int) Math.ceil(Math.log(tableSize) / Math.log(2));
+        int b = (int) Math.max(1, Math.ceil(Math.log(tableSize) / Math.log(2)));
         this.b = b ;
         int[][] hashMatrix = new int[b][u];
 
