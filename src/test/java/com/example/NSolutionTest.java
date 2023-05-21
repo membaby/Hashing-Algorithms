@@ -10,7 +10,7 @@ public class NSolutionTest
     @Test
     public void insertionTest()
     {
-        NSquaredSolution hash_table = new NSquaredSolution();
+        NSquaredSolution hash_table = new NSquaredSolution(100);
         assertTrue(hash_table.insert("apple"));
         assertTrue(hash_table.insert("banana"));
         assertTrue(hash_table.insert("cherry"));
@@ -19,7 +19,7 @@ public class NSolutionTest
 
     @Test
     public void deletionTest(){
-        NSquaredSolution hash_table = new NSquaredSolution();
+        NSquaredSolution hash_table = new NSquaredSolution(100);
         hash_table.insert("apple");
         hash_table.insert("banana");
         hash_table.insert("cherry");
@@ -29,7 +29,7 @@ public class NSolutionTest
 
     @Test
     public void SearchTest(){
-        NSquaredSolution hash_table = new NSquaredSolution();
+        NSquaredSolution hash_table = new NSquaredSolution(100);
         hash_table.insert("apple");
         hash_table.insert("banana");
         hash_table.insert("cherry");
