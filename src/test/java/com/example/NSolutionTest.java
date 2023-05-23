@@ -27,6 +27,8 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(2);
         assertTrue(hash_table.insert("l"));
         assertTrue(hash_table.insert("6"));
+        assertTrue(hash_table.search("l"));
+        assertTrue(hash_table.search("6"));
     }
 
     @Test
