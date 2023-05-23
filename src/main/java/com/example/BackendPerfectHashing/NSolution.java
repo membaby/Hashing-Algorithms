@@ -3,7 +3,6 @@ package com.example.BackendPerfectHashing;
 public class NSolution extends PerfectHashing{
 
 	private int prevRebuilds = 0;
-	private int size = 0;
 	private Lvl2Table[] table;
 	UniverseHashing hashFunc;
 
@@ -29,7 +28,6 @@ public class NSolution extends PerfectHashing{
 		int index = hashFunc.hash(numForm);
 		boolean res = table[index].insert(key);
 		prevRebuilds = table[index].get_prev_rebuilds();
-		if (res) size++;
 		return res;
     }
 	
@@ -38,7 +36,6 @@ public class NSolution extends PerfectHashing{
 		long numForm = hashFunc.hash_string(key);
 		int index = hashFunc.hash(numForm);
 		boolean res = table[index].delete(key);
-		if (res) size--;
 		return res;
     }
 
@@ -48,7 +45,16 @@ public class NSolution extends PerfectHashing{
         return table[index].search(key);
     }
 
-	public int size() {return size;}
+	public int first_level_size() {return table.length;}
+
+	public int second_level_size() 
+	{
+		int accum = 0;
+		for (Lvl2Table lvl2Table : table) {
+			accum += lvl2Table.size();
+		}
+		return accum;
+	}
 
 	public int get_prev_rebuilds() {return prevRebuilds;}
 
@@ -108,7 +114,6 @@ public class NSolution extends PerfectHashing{
 				for (String string : table)System.out.printf(string + ", ");
 				System.out.printf("\n");
 				System.out.printf("New key = %s\n", key);
-				System.out.println("Lvl 1 size = " + size);
 				System.out.println("Rebuild count = " + prevRebuildCount);
 				System.out.println();
 
@@ -156,7 +161,6 @@ public class NSolution extends PerfectHashing{
 				for (String string : table)System.out.printf(string + ", ");
 				System.out.printf("\nallEntries contents: ");
 				for (String string : allEntries) System.out.printf(string + ", ");
-				System.out.println("Size = " + size);
 			} 
 			
 			int log = log2(entryCount*entryCount);
@@ -196,5 +200,6 @@ public class NSolution extends PerfectHashing{
 		}
 
 		public int get_prev_rebuilds(){return prevRebuildCount;}
+		public int size() {return table.length;}
 	}
 }
