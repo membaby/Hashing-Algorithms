@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class NSquaredSolution extends PerfectHashing{
 
-	private int rebuildCount = 0;
+	private int prevRebuilds = 0;
 	private String[] hashTable;
 	private int TSize;
 	private UniverseHashing hasher = new UniverseHashing();
@@ -28,6 +28,7 @@ public class NSquaredSolution extends PerfectHashing{
 
 	@Override
     public boolean insert(String item){
+		prevRebuilds = 0;
 		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
 		if (hashTable[hash] == null){
 			elements.add(item);
@@ -97,16 +98,16 @@ public class NSquaredSolution extends PerfectHashing{
 						New_hashTable = new String[TSize];
 						New_hashTable[hash] = item;
 						i = 0;
-						rebuildCount++;
+						prevRebuilds++;
 					}
 				}
 		}
 		hashTable = New_hashTable;
 		elements = newelements;
-		rebuildCount++;
+		prevRebuilds++;
 	}
 
-	public int get_rebuild_count(){
-		return rebuildCount;
+	public int get_prev_rebuilds(){
+		return prevRebuilds;
 	}
 }
