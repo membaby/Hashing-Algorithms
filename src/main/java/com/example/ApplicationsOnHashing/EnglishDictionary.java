@@ -5,12 +5,11 @@ import com.example.BackendPerfectHashing.NSquaredSolution;
 import com.example.BackendPerfectHashing.PerfectHashing;
 
 import java.io.*;
-import java.util.List;
 import java.util.Scanner;
 
-class EnglishDictionary implements IDictionary {
+public class EnglishDictionary implements IDictionary {
     private PerfectHashing perfectHashing;
-    EnglishDictionary(String backendType, int tableSize){
+    public EnglishDictionary(String backendType, int tableSize){
         // Construction: creates a new EnglishDictionary object, using the specified backend type.
         if (backendType.equals("1")) {
             perfectHashing = new NSquaredSolution(tableSize);
