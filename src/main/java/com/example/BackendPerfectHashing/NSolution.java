@@ -3,6 +3,7 @@ import java.util.*;
 
 public class NSolution extends PerfectHashing{
 
+	private int prevRebuilds = 0;
 	private int size = 0;
 	private Lvl2Table[] table;
 	UniverseHashing hashFunc;
@@ -24,9 +25,11 @@ public class NSolution extends PerfectHashing{
 	@Override
     public boolean insert(String key)
 	{
+		prevRebuilds = 0;
 		String binaryStr = hashFunc.hash_string(key);
 		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 		boolean res = table[index].insert(key);
+		prevRebuilds = table[index].get_prev_rebuilds();
 		if (res) size++;
 		return res;
     }
@@ -48,6 +51,8 @@ public class NSolution extends PerfectHashing{
     }
 
 	public int size() {return size;}
+
+	public int get_prev_rebuilds() {return prevRebuilds;}
 
 	private int log2(int x)
 	{
