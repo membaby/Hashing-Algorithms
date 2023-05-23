@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.ApplicationsOnHashing.DictionaryHandler;
+import com.example.BackendPerfectHashing.UniverseHashing;
 // import com.example.BackendPerfectHashing.UniverseHashing;
 // import java.io.IOException;
 // import java.util.Arrays;
@@ -32,6 +33,10 @@ public class PerfectHashingApp
 
     public static void main( String[] args )
     {
+        UniverseHashing universeHashing = new UniverseHashing();
+        universeHashing.newHashMatrix(100);
+        System.out.println(universeHashing.hash(universeHashing.getHashMatrix(), universeHashing.hash_string("l")));
+        System.out.println(universeHashing.hash(universeHashing.getHashMatrix(), universeHashing.hash_string("6")));
 
         //CLI implementation
         Scanner scanner = new Scanner(System.in);

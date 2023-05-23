@@ -90,6 +90,11 @@ public class NSquaredSolution extends PerfectHashing{
 					System.out.println("word to be added:"+newelements.get(i)+" /binary value is:"+hasher.hash_string(newelements.get(i)));
 					if (hasher.hash_string(New_hashTable[hash]).equals(hasher.hash_string(newelements.get(i)))){
 						hasher.newHashBase();
+						hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+						New_hashTable = new String[TSize];
+						New_hashTable[hash] = item;
+						i = 0;
+						prevRebuilds++;
 					}
 					else {
 						hasher.newHashBase();
