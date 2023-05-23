@@ -68,7 +68,7 @@ public class UniverseHashing
 
     public String hash_string(String str)
     {
-        long code = 0;
+        long code = 1;
         for (int i=0; i < str.length(); i++)
         {
             code = code * this.hashBase + str.charAt(i);
