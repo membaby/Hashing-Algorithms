@@ -1,10 +1,7 @@
 package com.example;
 
 import com.example.BackendPerfectHashing.NSquaredSolution;
-import com.example.BackendPerfectHashing.NSquaredSolution;
-import com.example.BackendPerfectHashing.NSquaredSolution;
 import org.junit.Test;
-import com.example.BackendPerfectHashing.NSquaredSolution;
 
 import java.io.File;
 import java.io.FileNotFoundException;

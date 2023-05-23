@@ -69,6 +69,7 @@ public class NSquaredSolution extends PerfectHashing{
 
 
 	private void rehash(String item){
+		prevRebuilds = 1;
 		ArrayList<String> newelements = new ArrayList<>();
 		for (int i = 0; i < elements.size(); i++) {
 			if (search(elements.get(i))){
