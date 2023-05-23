@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class UniverseHashing
 {
-	private int[] primes = {31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127};
     private int u = 64 ;
     private int b = 0 ;
     private int[][] currentHashMatrix;
@@ -21,36 +20,30 @@ public class UniverseHashing
         return this.hashBase;
     }
 
-    // private boolean isPrime(int n)
-    // {
-    //     for(int i = 1 ; i < n ; i++)
-    //     {
-    //         if(n % i == 0 && i != 1)
-    //         {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
+     private boolean isPrime(int n)
+     {
+         for(int i = 1 ; i < n ; i++)
+         {
+             if(n % i == 0 && i != 1)
+             {
+                 return false;
+             }
+         }
+         return true;
+     }
 
-    public void newHashBase()
-    {
-		int oldBase = hashBase;
-		Random rand = new Random();
-		while (hashBase == oldBase){
-			hashBase = primes[rand.nextInt(primes.length)];
-		}
-
-        // //make prime hash base
-        // while(true)
-        // {
-        //     test = (int) (Math.random() * 256  + 1);
-        //     if(isPrime(test))
-        //     {
-        //         this.hashBase = test;
-        //         break;
-        //     }
-        // }
+    public void newHashBase() {
+        int test = 0 ;
+        //make prime hash base
+        while(true)
+        {
+            test = (int) (Math.random() * 256  + 1);
+            if(isPrime(test))
+            {
+                this.hashBase = test;
+                break;
+            }
+        }
     }
 
     public void newHashMatrix(int tableSize)

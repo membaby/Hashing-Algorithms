@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.ApplicationsOnHashing.DictionaryHandler;
+import com.example.BackendPerfectHashing.UniverseHashing;
 // import com.example.BackendPerfectHashing.UniverseHashing;
 // import java.io.IOException;
 // import java.util.Arrays;
