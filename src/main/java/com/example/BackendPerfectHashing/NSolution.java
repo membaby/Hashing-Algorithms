@@ -162,7 +162,8 @@ public class NSolution extends PerfectHashing{
 			} 
 			
 			int log = log2(entryCount*entryCount);
-			int size = 1 << (log+1);
+			int size = 1 << (log);
+			if (size < entryCount*entryCount) size <<= 1;
 			table = new String[size];
 			prevRebuildCount = 0;
 			findingNoCollisionsFunc:
@@ -173,14 +174,12 @@ public class NSolution extends PerfectHashing{
 				table = new String[size];
 				for (j=0; j<entryCount; j++)
 				{
-					// if (allEntries[j] == null) System.out.println("Is null");
-					// else System.out.println(allEntries[j]);
 					String binaryStr = hashFunc.hash_string(allEntries[j]);
 					int index = 0;
 					index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 					if (table[index] != null)
 					{
-						if (hashFunc.hash_string(newKey).equals(hashFunc.hash_string(table[index])))
+						if (hashFunc.hash_string(allEntries[j]).equals(hashFunc.hash_string(table[index])))
 						{
 							//two strings with same hashcode
 							hashFunc.newHashBase();
