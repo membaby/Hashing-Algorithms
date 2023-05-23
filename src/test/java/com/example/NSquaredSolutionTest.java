@@ -91,7 +91,7 @@ public class NSquaredSolutionTest
         NSquaredSolution hash_table = new NSquaredSolution(5000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\5000.txt");
+            File file = new File("\\testFiles\\5000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
