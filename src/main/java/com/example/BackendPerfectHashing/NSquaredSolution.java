@@ -80,15 +80,17 @@ public class NSquaredSolution extends PerfectHashing{
 		int hash = hasher.hash(hasher.hash_string(item));
 		String[] New_hashTable = new String[TSize];
 		New_hashTable[hash] = item;
+		elements = new ArrayList<>();
 		newelements.add(item);
 		for (int i = 0; i < newelements.size(); i++) {
 				hash = hasher.hash(hasher.hash_string(newelements.get(i)));
 				if (New_hashTable[hash] == null){
 					New_hashTable[hash] = newelements.get(i);
+					elements.add(newelements.get(i));
 				}
 				else if (!New_hashTable[hash].equals(newelements.get(i))){
-					System.out.println("word in table is:"+New_hashTable[hash]+" /binary value is:"+hasher.hash_string(New_hashTable[hash]));
-					System.out.println("word to be added:"+newelements.get(i)+" /binary value is:"+hasher.hash_string(newelements.get(i)));
+					//System.out.println("word in table is:"+New_hashTable[hash]+" /binary value is:"+hasher.hash_string(New_hashTable[hash]));
+					//System.out.println("word to be added:"+newelements.get(i)+" /binary value is:"+hasher.hash_string(newelements.get(i)));
 					if (hasher.hash_string(New_hashTable[hash]) == hasher.hash_string(newelements.get(i))){
 						hasher.newHashBase();
 						hash = hasher.hash(hasher.hash_string(item));
@@ -96,6 +98,7 @@ public class NSquaredSolution extends PerfectHashing{
 						New_hashTable[hash] = item;
 						i = -1;
 						prevRebuilds++;
+						elements = new ArrayList<>();
 					}
 					else {
 						hasher.newHashBase();
@@ -105,11 +108,11 @@ public class NSquaredSolution extends PerfectHashing{
 						New_hashTable[hash] = item;
 						i = -1;
 						prevRebuilds++;
+						elements = new ArrayList<>();
 					}
 				}
 		}
 		hashTable = New_hashTable;
-		elements = newelements;
 		prevRebuilds++;
 	}
 

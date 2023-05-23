@@ -117,7 +117,7 @@ public class NSquaredSolutionTest
 		HashSet<String> refSet = new HashSet<String>(500);
 		NSquaredSolution mySet = new NSquaredSolution(500);
 		try{
-			File file = new File("comparisonFiles/500.txt");
+			File file = new File("E:\\college\\level-2\\2nd_term\\Data_structure-2\\projects\\3\\perfect hashing\\testFiles\\500.txt");
             Scanner scn = new Scanner(file);
 			while(scn.hasNext())
 			{
@@ -136,7 +136,7 @@ public class NSquaredSolutionTest
 		HashSet<String> refSet = new HashSet<String>(1000);
 		NSquaredSolution mySet = new NSquaredSolution(1000);
 		try{
-			File file = new File("comparisonFiles/1000.txt");
+			File file = new File("E:\\college\\level-2\\2nd_term\\Data_structure-2\\projects\\3\\perfect hashing\\testFiles\\1000.txt");
             Scanner scn = new Scanner(file);
 			while(scn.hasNext())
 			{
@@ -155,7 +155,7 @@ public class NSquaredSolutionTest
 		HashSet<String> refSet = new HashSet<String>(5000);
 		NSquaredSolution mySet = new NSquaredSolution(5000);
 		try{
-			File file = new File("comparisonFiles/5000.txt");
+			File file = new File("E:\\college\\level-2\\2nd_term\\Data_structure-2\\projects\\3\\perfect hashing\\testFiles\\5000.txt");
             Scanner scn = new Scanner(file);
 			while(scn.hasNext())
 			{
@@ -174,7 +174,7 @@ public class NSquaredSolutionTest
 		HashSet<String> refSet = new HashSet<String>(10000);
 		NSquaredSolution mySet = new NSquaredSolution(10000);
 		try{
-			File file = new File("comparisonFiles/10000.txt");
+			File file = new File("E:\\college\\level-2\\2nd_term\\Data_structure-2\\projects\\3\\perfect hashing\\comparisonFiles\\10000.txt");
             Scanner scn = new Scanner(file);
 			while(scn.hasNext())
 			{
