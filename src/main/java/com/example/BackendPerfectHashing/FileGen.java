@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.Buffer;
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.Random;
 
 public class FileGen {
@@ -14,7 +15,18 @@ public class FileGen {
 
 	
 	public static void main(String[] args) {
-		generate_file(10_000_000);
+		int[] sizes = {
+			50, 100, 200, 500, 800,
+			1000, 2000, 5000, 8000,
+			10000, 20000, 50000, 80000,
+			100000, 200000, 500000, 800000,
+			1000000, 2000000, 5000000, 8000000, 
+			10_000_000, 
+		};
+		for (int i : sizes) {
+			generate_file(i);
+		}
+		// generate_file(10000000);
 	}
 
 	static void generate_file(int size)
@@ -22,6 +34,7 @@ public class FileGen {
 		final int minLen = 1, maxLen = 8;
 		Random rand = new Random();
 		String fname = "comparisonFiles/" + size + ".txt";
+		HashSet<String> strings = new HashSet<String>(size);
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(fname));
 			while(size-- > 0)
@@ -33,6 +46,11 @@ public class FileGen {
 					char c = chars.charAt(rand.nextInt(chars.length()));
 					str.append(c);
 				}
+				if (strings.contains(str.toString())){
+					size++;
+					continue;
+				}
+				strings.add(str.toString());
 				writer.write(str.toString() + "\n");
 
 			}
