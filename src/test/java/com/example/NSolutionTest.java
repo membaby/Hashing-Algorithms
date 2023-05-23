@@ -5,6 +5,7 @@ import com.example.BackendPerfectHashing.NSquaredSolution;
 import org.junit.Test;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
@@ -207,6 +208,135 @@ public class NSolutionTest
 
         assertEquals(370104, countSuccessfulInsertions);
     }
+
+	@Test
+	public void insert500()
+	{
+		HashSet<String> refSet = new HashSet<String>(500);
+		NSolution mySet = new NSolution(500);
+		try{
+			File file = new File("comparisonFiles/500.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert1000()
+	{
+		HashSet<String> refSet = new HashSet<String>(1000);
+		NSolution mySet = new NSolution(1000);
+		try{
+			File file = new File("comparisonFiles/1000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert5000()
+	{
+		HashSet<String> refSet = new HashSet<String>(5000);
+		NSolution mySet = new NSolution(5000);
+		try{
+			File file = new File("comparisonFiles/5000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert10000()
+	{
+		HashSet<String> refSet = new HashSet<String>(10000);
+		NSolution mySet = new NSolution(10000);
+		try{
+			File file = new File("comparisonFiles/10000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert50000()
+	{
+		HashSet<String> refSet = new HashSet<String>(50000);
+		NSolution mySet = new NSolution(50000);
+		try{
+			File file = new File("comparisonFiles/50000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert100000()
+	{
+		HashSet<String> refSet = new HashSet<String>(100000);
+		NSolution mySet = new NSolution(100000);
+		try{
+			File file = new File("comparisonFiles/100000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert1000000()
+	{
+		HashSet<String> refSet = new HashSet<String>(1000000);
+		NSolution mySet = new NSolution(1000000);
+		try{
+			File file = new File("comparisonFiles/1000000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
+	@Test
+	public void insert2000000()
+	{
+		HashSet<String> refSet = new HashSet<String>(2000000);
+		NSolution mySet = new NSolution(2000000);
+		try{
+			File file = new File("comparisonFiles/2000000.txt");
+            Scanner scn = new Scanner(file);
+			while(scn.hasNext())
+			{
+				String next = scn.next();
+				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+		} catch (FileNotFoundException e){assertTrue(false);}
+	}
+
 
     @Test
     public void deletionTest(){
