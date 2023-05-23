@@ -93,7 +93,7 @@ public class NSquaredSolution extends PerfectHashing{
 						hash = hasher.hash(hasher.hash_string(item));
 						New_hashTable = new String[TSize];
 						New_hashTable[hash] = item;
-						i = 0;
+						i = -1;
 						prevRebuilds++;
 					}
 					else {
@@ -102,7 +102,7 @@ public class NSquaredSolution extends PerfectHashing{
 						hash = hasher.hash(hasher.hash_string(item));
 						New_hashTable = new String[TSize];
 						New_hashTable[hash] = item;
-						i = 0;
+						i = -1;
 						prevRebuilds++;
 					}
 				}
