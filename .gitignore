@@ -1,5 +1,4 @@
 *.pdf
 .vscode/
 target/
-comparisonFiles/*
 RebuildResults/*

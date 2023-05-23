@@ -20,8 +20,7 @@ public class RehashComp {
 			"comparisonFiles/1000.txt", "comparisonFiles/2000.txt", "comparisonFiles/5000.txt", "comparisonFiles/8000.txt", 
 			"comparisonFiles/10000.txt", "comparisonFiles/20000.txt", "comparisonFiles/50000.txt", "comparisonFiles/80000.txt", 
 			"comparisonFiles/100000.txt", "comparisonFiles/200000.txt", "comparisonFiles/500000.txt", "comparisonFiles/800000.txt",
-			"comparisonFiles/1000000.txt", "comparisonFiles/2000000.txt", "comparisonFiles/5000000.txt", "comparisonFiles/8000000.txt", 
-			"comparisonFiles/10000000.txt"
+			"comparisonFiles/1000000.txt", "comparisonFiles/2000000.txt", "comparisonFiles/5000000.txt"
 		};
 		for (int i=0; i < files.length; i++) {
 			try {
