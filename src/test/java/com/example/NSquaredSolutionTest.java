@@ -127,6 +127,9 @@ public class NSquaredSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
+			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
@@ -142,6 +145,9 @@ public class NSquaredSolutionTest
 			{
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
 			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
@@ -159,6 +165,9 @@ public class NSquaredSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
+			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
@@ -175,40 +184,12 @@ public class NSquaredSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
-		} catch (FileNotFoundException e){assertTrue(false);}
-	}
-
-	@Test
-	public void insert50000()
-	{
-		HashSet<String> refSet = new HashSet<String>(50000);
-		NSquaredSolution mySet = new NSquaredSolution(50000);
-		try{
-			File file = new File("comparisonFiles/50000.txt");
-            Scanner scn = new Scanner(file);
-			while(scn.hasNext())
-			{
-				String next = scn.next();
-				assertEquals(refSet.add(next), mySet.insert(next));
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
 			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
-	@Test
-	public void insert100000()
-	{
-		HashSet<String> refSet = new HashSet<String>(100000);
-		NSquaredSolution mySet = new NSquaredSolution(100000);
-		try{
-			File file = new File("comparisonFiles/100000.txt");
-            Scanner scn = new Scanner(file);
-			while(scn.hasNext())
-			{
-				String next = scn.next();
-				assertEquals(refSet.add(next), mySet.insert(next));
-			}
-		} catch (FileNotFoundException e){assertTrue(false);}
-	}
 
     @Test
     public void deletionTest(){

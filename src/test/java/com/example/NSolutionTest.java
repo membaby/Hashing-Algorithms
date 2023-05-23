@@ -222,6 +222,9 @@ public class NSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
+			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
@@ -237,6 +240,9 @@ public class NSolutionTest
 			{
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
 			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
@@ -254,6 +260,9 @@ public class NSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
+			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
@@ -269,6 +278,9 @@ public class NSolutionTest
 			{
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
 			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
@@ -286,6 +298,9 @@ public class NSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
+			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
@@ -301,6 +316,9 @@ public class NSolutionTest
 			{
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
 			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
@@ -318,6 +336,9 @@ public class NSolutionTest
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
 			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
+			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
 
@@ -333,6 +354,9 @@ public class NSolutionTest
 			{
 				String next = scn.next();
 				assertEquals(refSet.add(next), mySet.insert(next));
+			}
+			for (String string : refSet) {
+				assertTrue(mySet.search(string));
 			}
 		} catch (FileNotFoundException e){assertTrue(false);}
 	}
