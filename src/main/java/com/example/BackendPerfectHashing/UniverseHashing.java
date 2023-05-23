@@ -1,6 +1,5 @@
 package com.example.BackendPerfectHashing;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class UniverseHashing
@@ -22,17 +21,17 @@ public class UniverseHashing
         return this.hashBase;
     }
 
-    private boolean isPrime(int n)
-    {
-        for(int i = 1 ; i < n ; i++)
-        {
-            if(n % i == 0 && i != 1)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    // private boolean isPrime(int n)
+    // {
+    //     for(int i = 1 ; i < n ; i++)
+    //     {
+    //         if(n % i == 0 && i != 1)
+    //         {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     public void newHashBase()
     {

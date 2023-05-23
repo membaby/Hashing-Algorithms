@@ -1,5 +1,4 @@
 package com.example.BackendPerfectHashing;
-import java.util.*;
 
 public class NSolution extends PerfectHashing{
 
@@ -170,15 +169,20 @@ public class NSolution extends PerfectHashing{
 			while(true)
 			{
 				prevRebuildCount++;
-				hashFunc.newHashMatrix(table.length);
+				hashFunc.newHashMatrix(size);
 				table = new String[size];
 				for (j=0; j<entryCount; j++)
 				{
+					String nextString = allEntries[j];
 					String binaryStr = hashFunc.hash_string(allEntries[j]);
-					int index = 0;
-					index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+					int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 					if (table[index] != null)
 					{
+						String collisionString = table[index];
+						String hash1 = hashFunc.hash_string(nextString);
+						String hash2 = hashFunc.hash_string(collisionString);
+						int i1 = hashFunc.hash(hashFunc.getHashMatrix(), hash1);
+						int i2 = hashFunc.hash(hashFunc.getHashMatrix(), hash2);
 						if (hashFunc.hash_string(allEntries[j]).equals(hashFunc.hash_string(table[index])))
 						{
 							//two strings with same hashcode

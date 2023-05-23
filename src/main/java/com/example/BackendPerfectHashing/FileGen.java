@@ -1,12 +1,8 @@
 package com.example.BackendPerfectHashing;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.Buffer;
-import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -37,6 +33,7 @@ public class FileGen {
 		HashSet<String> strings = new HashSet<String>(size);
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(fname));
+			writer.write(size+"\n");
 			while(size-- > 0)
 			{
 				int len = rand.nextInt(maxLen+1-minLen) + minLen;

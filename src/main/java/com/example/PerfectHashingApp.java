@@ -1,9 +1,9 @@
 package com.example;
 
 import com.example.ApplicationsOnHashing.DictionaryHandler;
-import com.example.BackendPerfectHashing.UniverseHashing;
-import java.io.IOException;
-import java.util.Arrays;
+// import com.example.BackendPerfectHashing.UniverseHashing;
+// import java.io.IOException;
+// import java.util.Arrays;
 import java.util.Scanner;
 
 public class PerfectHashingApp
