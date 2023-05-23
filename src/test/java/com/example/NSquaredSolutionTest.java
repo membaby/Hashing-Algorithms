@@ -63,7 +63,7 @@ public class NSquaredSolutionTest
         NSquaredSolution hash_table = new NSquaredSolution(1000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\1000.txt");
+            File file = new File("testFiles/1000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
@@ -91,7 +91,7 @@ public class NSquaredSolutionTest
         NSquaredSolution hash_table = new NSquaredSolution(5000);
         try
         {
-            File file = new File("\\testFiles\\5000.txt");
+            File file = new File("testFiles/5000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
@@ -130,6 +130,8 @@ public class NSquaredSolutionTest
         hash_table.insert("banana");
         hash_table.insert("cherry");
         assertTrue(hash_table.search("apple"));
+        assertTrue(hash_table.search("banana"));
+        assertTrue(hash_table.search("cherry"));
         assertFalse(hash_table.search("orange"));
     }
 

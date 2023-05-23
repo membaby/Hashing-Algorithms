@@ -19,6 +19,10 @@ public class NSolutionTest
         assertTrue(hash_table.insert("banana"));
         assertTrue(hash_table.insert("cherry"));
         assertFalse(hash_table.insert("apple"));
+        assertTrue(hash_table.search("apple"));
+        assertTrue(hash_table.search("banana"));
+        assertTrue(hash_table.search("cherry"));
+		
     }
 
 	@Test
@@ -47,6 +51,13 @@ public class NSolutionTest
         assertFalse(hash_table.insert("orange"));
         assertFalse(hash_table.insert("grape"));
         assertFalse(hash_table.insert("watermelon"));
+
+        assertTrue(hash_table.search("apple"));
+        assertTrue(hash_table.search("banana"));
+        assertTrue(hash_table.search("cherry"));
+        assertTrue(hash_table.search("orange"));
+        assertTrue(hash_table.search("grape"));
+        assertTrue(hash_table.search("watermelon"));
     }
 
     @Test
@@ -56,7 +67,7 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(1000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\1000.txt");
+            File file = new File("testFiles/1000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
@@ -68,13 +79,14 @@ public class NSolutionTest
                     countSuccessfulInsertions++;
                 }
             }
+			assertEquals(999, countSuccessfulInsertions);
         }
         catch(FileNotFoundException e)
         {
              System.out.println("File not found");
              e.printStackTrace();
+			 assertTrue(false);
         }
-        assertEquals(999, countSuccessfulInsertions);
     }
 
     @Test
@@ -84,7 +96,7 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(5000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\5000.txt");
+            File file = new File("testFiles/5000.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
@@ -114,7 +126,7 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(60000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\58109.txt");
+            File file = new File("testFiles/58109.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
@@ -144,7 +156,7 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(400000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\huge.txt");
+            File file = new File("testFiles/huge.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {
@@ -174,7 +186,7 @@ public class NSolutionTest
         NSolution hash_table = new NSolution(1200000);
         try
         {
-            File file = new File("D:\\JavaProjects\\Perfect-Hashing-Data-Structure\\testFiles\\million.txt");
+            File file = new File("testFiles/million.txt");
             Scanner scanFile = new Scanner(file);
             while(scanFile.hasNextLine())
             {

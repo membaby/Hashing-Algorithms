@@ -25,8 +25,8 @@ public class NSolution extends PerfectHashing{
     public boolean insert(String key)
 	{
 		prevRebuilds = 0;
-		String binaryStr = hashFunc.hash_string(key);
-		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		long numForm = hashFunc.hash_string(key);
+		int index = hashFunc.hash(numForm);
 		boolean res = table[index].insert(key);
 		prevRebuilds = table[index].get_prev_rebuilds();
 		if (res) size++;
@@ -35,17 +35,16 @@ public class NSolution extends PerfectHashing{
 	
     public boolean delete(String key)
 	{
-		String binaryStr = hashFunc.hash_string(key);
-		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+		long numForm = hashFunc.hash_string(key);
+		int index = hashFunc.hash(numForm);
 		boolean res = table[index].delete(key);
 		if (res) size--;
 		return res;
     }
 
     public boolean search(String key){
-        String binaryStr = hashFunc.hash_string(key);
-		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
-		
+        long numForm = hashFunc.hash_string(key);
+		int index = hashFunc.hash(numForm);
         return table[index].search(key);
     }
 
@@ -72,17 +71,17 @@ public class NSolution extends PerfectHashing{
 
 		public Lvl2Table()
 		{
-			table = new String[1];
+			table = new String[2];
 			hashFunc = new UniverseHashing();
-			hashFunc.newHashMatrix(1);
+			hashFunc.newHashMatrix(2);
 		}
 
 
 		public boolean insert(String key)
 		{
 			prevRebuildCount = 0;
-			String binaryStr = hashFunc.hash_string(key);
-			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			long numForm = hashFunc.hash_string(key);
+			int index = hashFunc.hash(numForm);
 			//If key already exists
 			if(search(key))	return false;
 			entryCount++;
@@ -120,8 +119,8 @@ public class NSolution extends PerfectHashing{
 
 		public boolean search(String key)
 		{
-			String binaryStr = hashFunc.hash_string(key);
-			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			long numForm = hashFunc.hash_string(key);
+			int index = hashFunc.hash(numForm);
 			if (table[index] == null) return false;
 			return table[index].equals(key);
 		}
@@ -129,8 +128,8 @@ public class NSolution extends PerfectHashing{
 		public boolean delete(String key)
 		{
 			if (!search(key)) return false;
-			String binaryStr = hashFunc.hash_string(key);
-			int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+			long numForm = hashFunc.hash_string(key);
+			int index = hashFunc.hash(numForm);
 			table[index] = null;
 			entryCount -= 1;
 			return true;
@@ -174,16 +173,16 @@ public class NSolution extends PerfectHashing{
 				for (j=0; j<entryCount; j++)
 				{
 					String nextString = allEntries[j];
-					String binaryStr = hashFunc.hash_string(allEntries[j]);
-					int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+					long numForm = hashFunc.hash_string(allEntries[j]);
+					int index = hashFunc.hash(numForm);
 					if (table[index] != null)
 					{
 						String collisionString = table[index];
-						String hash1 = hashFunc.hash_string(nextString);
-						String hash2 = hashFunc.hash_string(collisionString);
-						int i1 = hashFunc.hash(hashFunc.getHashMatrix(), hash1);
-						int i2 = hashFunc.hash(hashFunc.getHashMatrix(), hash2);
-						if (hashFunc.hash_string(allEntries[j]).equals(hashFunc.hash_string(table[index])))
+						long hash1 = hashFunc.hash_string(nextString);
+						long hash2 = hashFunc.hash_string(collisionString);
+						int i1 = hashFunc.hash(hash1);
+						int i2 = hashFunc.hash(hash2);
+						if (hashFunc.hash_string(allEntries[j]) == hashFunc.hash_string(table[index]))
 						{
 							//two strings with same hashcode
 							hashFunc.newHashBase();

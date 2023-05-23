@@ -29,7 +29,7 @@ public class NSquaredSolution extends PerfectHashing{
 	@Override
     public boolean insert(String item){
 		prevRebuilds = 0;
-		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+		int hash = hasher.hash(hasher.hash_string(item));
 		if (hashTable[hash] == null){
 			elements.add(item);
 			hashTable[hash] = item;
@@ -54,7 +54,7 @@ public class NSquaredSolution extends PerfectHashing{
     }
 	@Override
     public boolean delete(String item){
-		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+		int hash = hasher.hash(hasher.hash_string(item));
 		if (hashTable[hash] != null && hashTable[hash].equals(item)){
 			hashTable[hash] = null;
 			return true;
@@ -63,7 +63,7 @@ public class NSquaredSolution extends PerfectHashing{
     }
 	@Override
     public boolean search(String item){
-		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+		int hash = hasher.hash(hasher.hash_string(item));
 		return hashTable[hash] != null && hashTable[hash].equals(item);
     }
 
@@ -76,21 +76,21 @@ public class NSquaredSolution extends PerfectHashing{
 			}
 		}
 		hasher.newHashMatrix(TSize);
-		int hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+		int hash = hasher.hash(hasher.hash_string(item));
 		String[] New_hashTable = new String[TSize];
 		New_hashTable[hash] = item;
 		newelements.add(item);
 		for (int i = 0; i < newelements.size(); i++) {
-				hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(newelements.get(i)));
+				hash = hasher.hash(hasher.hash_string(newelements.get(i)));
 				if (New_hashTable[hash] == null){
 					New_hashTable[hash] = newelements.get(i);
 				}
 				else if (!New_hashTable[hash].equals(newelements.get(i))){
 					System.out.println("word in table is:"+New_hashTable[hash]+" /binary value is:"+hasher.hash_string(New_hashTable[hash]));
 					System.out.println("word to be added:"+newelements.get(i)+" /binary value is:"+hasher.hash_string(newelements.get(i)));
-					if (hasher.hash_string(New_hashTable[hash]).equals(hasher.hash_string(newelements.get(i)))){
+					if (hasher.hash_string(New_hashTable[hash]) == hasher.hash_string(newelements.get(i))){
 						hasher.newHashBase();
-						hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+						hash = hasher.hash(hasher.hash_string(item));
 						New_hashTable = new String[TSize];
 						New_hashTable[hash] = item;
 						i = 0;
@@ -99,7 +99,7 @@ public class NSquaredSolution extends PerfectHashing{
 					else {
 						hasher.newHashBase();
 						hasher.newHashMatrix(TSize);
-						hash = hasher.hash(hasher.getHashMatrix(), hasher.hash_string(item));
+						hash = hasher.hash(hasher.hash_string(item));
 						New_hashTable = new String[TSize];
 						New_hashTable[hash] = item;
 						i = 0;

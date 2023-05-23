@@ -35,8 +35,6 @@ public class PerfectHashingApp
     {
         UniverseHashing universeHashing = new UniverseHashing();
         universeHashing.newHashMatrix(100);
-        System.out.println(universeHashing.hash(universeHashing.getHashMatrix(), universeHashing.hash_string("l")));
-        System.out.println(universeHashing.hash(universeHashing.getHashMatrix(), universeHashing.hash_string("6")));
 
         //CLI implementation
         Scanner scanner = new Scanner(System.in);
