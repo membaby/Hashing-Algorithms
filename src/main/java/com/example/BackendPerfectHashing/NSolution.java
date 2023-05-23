@@ -1,8 +1,8 @@
 package com.example.BackendPerfectHashing;
-import java.util.*;
 
 public class NSolution extends PerfectHashing{
 
+	private int prevRebuilds = 0;
 	private int size = 0;
 	private Lvl2Table[] table;
 	UniverseHashing hashFunc;
@@ -24,9 +24,11 @@ public class NSolution extends PerfectHashing{
 	@Override
     public boolean insert(String key)
 	{
+		prevRebuilds = 0;
 		String binaryStr = hashFunc.hash_string(key);
 		int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 		boolean res = table[index].insert(key);
+		prevRebuilds = table[index].get_prev_rebuilds();
 		if (res) size++;
 		return res;
     }
@@ -48,6 +50,8 @@ public class NSolution extends PerfectHashing{
     }
 
 	public int size() {return size;}
+
+	public int get_prev_rebuilds() {return prevRebuilds;}
 
 	private int log2(int x)
 	{
@@ -157,25 +161,29 @@ public class NSolution extends PerfectHashing{
 			} 
 			
 			int log = log2(entryCount*entryCount);
-			int size = 1 << (log+1);
+			int size = 1 << (log);
+			if (size < entryCount*entryCount) size <<= 1;
 			table = new String[size];
 			prevRebuildCount = 0;
 			findingNoCollisionsFunc:
 			while(true)
 			{
 				prevRebuildCount++;
-				hashFunc.newHashMatrix(table.length);
+				hashFunc.newHashMatrix(size);
 				table = new String[size];
 				for (j=0; j<entryCount; j++)
 				{
-					// if (allEntries[j] == null) System.out.println("Is null");
-					// else System.out.println(allEntries[j]);
+					String nextString = allEntries[j];
 					String binaryStr = hashFunc.hash_string(allEntries[j]);
-					int index = 0;
-					index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
+					int index = hashFunc.hash(hashFunc.getHashMatrix(), binaryStr);
 					if (table[index] != null)
 					{
-						if (hashFunc.hash_string(newKey).equals(hashFunc.hash_string(table[index])))
+						String collisionString = table[index];
+						String hash1 = hashFunc.hash_string(nextString);
+						String hash2 = hashFunc.hash_string(collisionString);
+						int i1 = hashFunc.hash(hashFunc.getHashMatrix(), hash1);
+						int i2 = hashFunc.hash(hashFunc.getHashMatrix(), hash2);
+						if (hashFunc.hash_string(allEntries[j]).equals(hashFunc.hash_string(table[index])))
 						{
 							//two strings with same hashcode
 							hashFunc.newHashBase();

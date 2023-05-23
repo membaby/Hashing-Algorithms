@@ -21,6 +21,14 @@ public class NSolutionTest
         assertFalse(hash_table.insert("apple"));
     }
 
+	@Test
+    public void insertionTest2()
+    {
+        NSolution hash_table = new NSolution(2);
+        assertTrue(hash_table.insert("l"));
+        assertTrue(hash_table.insert("6"));
+    }
+
     @Test
     public void insertionDuplicate()
     {

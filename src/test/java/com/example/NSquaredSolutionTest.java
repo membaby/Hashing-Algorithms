@@ -24,6 +24,20 @@ public class NSquaredSolutionTest
         assertTrue(hash_table.insert("cherry"));
         assertFalse(hash_table.insert("apple"));
     }
+
+	@Test
+    public void insertionTest2()
+    {
+        NSquaredSolution hash_table = new NSquaredSolution(2);
+        assertTrue(hash_table.insert("l"));
+        assertTrue(hash_table.insert("6"));
+        assertTrue(hash_table.search("l"));
+        assertTrue(hash_table.search("6"));
+		
+    }
+
+
+
     @Test
     public void insertionDuplicate()
     {
