@@ -95,8 +95,8 @@ public class NSquaredSolution extends PerfectHashing{
 						prevRebuilds++;
 					}
 				}
+
 		}
-		hashTable = New_hashTable;
 		elements = newelements;
 	}
 
