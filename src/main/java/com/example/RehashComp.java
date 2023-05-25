@@ -15,9 +15,8 @@ public class RehashComp {
 		NSolution linearTable;
 		NSquaredSolution quadraticTable;
 		String[] files = {
-			"comparisonFiles/50.txt", 
-			"comparisonFiles/100.txt", "comparisonFiles/200.txt", "comparisonFiles/500.txt", "comparisonFiles/800.txt", 
-			"comparisonFiles/1000.txt", "comparisonFiles/2000.txt", "comparisonFiles/5000.txt", "comparisonFiles/8000.txt", 
+			"comparisonFiles/100.txt", "comparisonFiles/500.txt",
+			"comparisonFiles/1000.txt", "comparisonFiles/5000.txt",
 			"comparisonFiles/10000.txt"
 		};
 		for (int i=0; i < files.length; i++) {

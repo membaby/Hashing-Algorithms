@@ -1,0 +1,7 @@
+linear table:
+Lvl1 size = :1024
+Lvl2 size = :2948
+
+
+quadratic table:
+Size = :1000000

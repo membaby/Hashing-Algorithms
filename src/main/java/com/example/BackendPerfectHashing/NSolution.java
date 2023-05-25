@@ -99,26 +99,6 @@ public class NSolution extends PerfectHashing{
 			}
 			
 			rebuild(key);
-
-			//Comparing entry count to number of non null entries
-			int count = 0;
-			for (String entry : table) {
-				if (entry != null) count++;
-			}
-			if (count != entryCount)
-			{
-				//Problems
-				System.out.printf("Something went wrong during this insert.\n");
-				System.out.printf("table length = %d. entryCount = %d\n", table.length, entryCount);
-				System.out.printf("table contents: ");
-				for (String string : table)System.out.printf(string + ", ");
-				System.out.printf("\n");
-				System.out.printf("New key = %s\n", key);
-				System.out.println("Rebuild count = " + prevRebuildCount);
-				System.out.println();
-
-			}
-			
 			return true;
 		}
 
@@ -153,16 +133,6 @@ public class NSolution extends PerfectHashing{
 					j++;
 				}
 			}
-			if (j != entryCount)
-			{
-				System.out.printf("allEntries didn't fill up properly.\n");
-				System.out.printf("table length = %d. j = %d. entryCount = %d\n", table.length, j, entryCount);
-				System.out.printf("table contents: ");
-				for (String string : table)System.out.printf(string + ", ");
-				System.out.printf("\nallEntries contents: ");
-				for (String string : allEntries) System.out.printf(string + ", ");
-			} 
-			
 			int log = log2(entryCount*entryCount);
 			int size = 1 << (log);
 			if (size < entryCount*entryCount) size <<= 1;
