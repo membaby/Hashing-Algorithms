@@ -1,7 +1,7 @@
 package com.example.Trees;
 import java.util.*;
 
-abstract class Tree<Any extends Comparable<Any>> {
+public abstract class Tree<Any extends Comparable<Any>> {
     // Root node pointer. Will be null for an empty tree.
     protected class Node {
         Node left;
@@ -64,9 +64,9 @@ abstract class Tree<Any extends Comparable<Any>> {
     // to be overridden by the subclasses
     protected abstract void update(Node node);
 
-    protected abstract boolean insert(Any key);
+    public abstract boolean insert(Any key);
 
-    protected abstract boolean delete(Any key);
+    public abstract boolean delete(Any key);
 
     protected abstract Node insert(Node node, Any key);
 

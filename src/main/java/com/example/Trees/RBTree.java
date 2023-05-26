@@ -30,7 +30,7 @@ public class RBTree<Any extends Comparable<Any>> extends Tree<Any>
 
 	}
 
-	RBTree()
+	public RBTree()
 	{
 		nil = new RBNode(null, true);
 		root = nil;

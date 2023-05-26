@@ -1,0 +1,3 @@
+linear table time = 1288
+avl time = 1548
+RB time = 1713

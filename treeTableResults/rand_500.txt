@@ -1,0 +1,4 @@
+linear table time = 1054
+quadratic table time = 2121
+avl time = 584
+RB time = 699
